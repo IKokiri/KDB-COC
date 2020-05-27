@@ -7,6 +7,6 @@ use App\Controller\OCController;
 $oc = new OCController();
 
 
-// $o = $oc->read();
+$o = $oc->read();
 
-// echo $o;
+echo $o;

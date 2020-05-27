@@ -66,8 +66,7 @@ class Database extends InfoDB
              * SALVA NA VARIAVEL ESTATICA O OBJETO REFERENTE A CONEXÃO COM O BANCO.
              * AS VARIAVEIS QUE SAO USADAS PARA CONEXAO SÃO DA CLASSE PAI
              */
-            // self::$con = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getDatabase() . '', $this->getUser(), $this->getPassword(), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-            self::$con = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getDatabase() . '', $this->getUser(), $this->getPassword());
+            self::$con = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getDatabase() . '', $this->getUser(), $this->getPassword(), array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
             /**
              * DEFINE O TIPO DE MANIPULAÇÃO DE ERRO SERÁ USADO PELO PDO
              */
@@ -102,12 +101,14 @@ class Database extends InfoDB
 
             $arrayRetorno['status'] = true;
             $arrayRetorno['result'] = $sql->execute();
+            $arrayRetorno['result_array'] = $sql->fetchAll(PDO::FETCH_ASSOC);
             $arrayRetorno['count'] = $sql->rowCount();
             $arrayRetorno['MSN'] = "";
 
         } catch (\PDOException $Exception) {
 
             $arrayRetorno['status'] = false;
+            $arrayRetorno['MSN'] = $Exception;
             
         }
 

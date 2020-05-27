@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Model\OCController_Model;
+use App\Model\OCModel;
 
 class OCController {
 
@@ -10,7 +10,7 @@ class OCController {
     private $numero;
     
     function __construct(){
-        $this->model = new OCController_Model();
+        $this->model = new OCModel();
     }
 
 
@@ -19,7 +19,10 @@ class OCController {
     }
 
     function read(){
-        return $this->model->get();
+        // return $this->model->get();
+        // return $this->model->save();
+        // return $this->model->update();
+        // return $this->model->delete();
     }
 
     function update(){

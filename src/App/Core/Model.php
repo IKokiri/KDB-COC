@@ -6,10 +6,12 @@ use App\DAO\Database;
 
 class Model {
 
-    private $con;
+    protected $conn;
 
     function __construct(){
-        return $con = Database::getConnect();
+        
+        $this->conn = Database::getConnect();
+        
     }
 
     
