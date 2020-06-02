@@ -2,11 +2,15 @@
 
 require_once "./vendor/autoload.php";
 
-use App\Controller\OCController;
+$request = $_REQUEST;
 
-$oc = new OCController();
+$class = $request['class'];
+$method = $request['method'];
+$namespace = "App\Controller\\".$class;
+$params = $request;
 
+$class = new $namespace;
 
-$o = $oc->read();
+$result = call_user_func_array(array($class, $method), $params);
 
-echo $o;
+echo json_encode($result);

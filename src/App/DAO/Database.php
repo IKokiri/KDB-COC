@@ -104,7 +104,8 @@ class Database extends InfoDB
             $arrayRetorno['result_array'] = $sql->fetchAll(PDO::FETCH_ASSOC);
             $arrayRetorno['count'] = $sql->rowCount();
             $arrayRetorno['MSN'] = "";
-
+            
+            
         } catch (\PDOException $Exception) {
 
             $arrayRetorno['status'] = false;
@@ -134,7 +135,4 @@ class Database extends InfoDB
     }
 
 }
-
-
-
 ?>

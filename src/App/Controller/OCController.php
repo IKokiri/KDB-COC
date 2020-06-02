@@ -7,29 +7,30 @@ use App\Model\OCModel;
 class OCController {
 
     private $model;
-    private $numero;
     
+
     function __construct(){
         $this->model = new OCModel();
     }
 
+    function create($data){
 
-    function create(){
-
+        return $this->model->save($data);
     }
 
-    function read(){
-        // return $this->model->get();
-        // return $this->model->save();
-        // return $this->model->update();
-        // return $this->model->delete();
+    function read($request){
+        
+        return $this->model->get();
     }
 
     function update(){
 
+        return $this->model->update();
     }
 
     function delete(){
-
+        
+        return $this->model->delete();
     }
+
 }

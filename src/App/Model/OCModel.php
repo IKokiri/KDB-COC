@@ -10,37 +10,35 @@ use PDO;
 class OCModel extends Model{
 
     function get(){
-
-        $sql = "select * from ordem_compra where id = :id";
+        
+        $sql = "SELECT * FROM `coc`.`ordem_compra`";
 
         $query = $this->conn->prepare($sql);
 
-        $query->bindValue(':id', 1, PDO::PARAM_STR);
-
         $result = Database::executa($query);   
 
-        echo json_encode($result);
+        return $result;
     }
 
-
-    function save(){
+    function save($data){
 
         $sql = "INSERT INTO `coc`.`ordem_compra`
-                    (`numero`)
+                    (`numero`,
+                    `criado`)
                     VALUES
-                    (:numero);";
+                    (:numero,
+                    curtime())";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', 432, PDO::PARAM_STR);
+        $query->bindValue(':numero', 12, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
 
-        echo json_encode($result);
+        return $result;
     }
 
-
-    function update(){
+    function update($data){
 
         $sql = "UPDATE `coc`.`ordem_compra`
                     SET
@@ -54,10 +52,10 @@ class OCModel extends Model{
 
         $result = Database::executa($query);   
 
-        echo json_encode($result);
+        return $result;
     }
 
-    function delete(){
+    function delete($id){
 
         $sql = "DELETE FROM `coc`.`ordem_compra`
                     WHERE `id` = :id;";
@@ -67,8 +65,9 @@ class OCModel extends Model{
         $query->bindValue(':id', 1, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
-
-        echo json_encode($result);
+        
+        return $result;
     }
+
 }
 
