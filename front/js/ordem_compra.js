@@ -1,19 +1,88 @@
 const base_request = "http://localhost:8000"
+const controller = "OCController"
+
 $(document).ready(function(){
-    inicio();
+
+inicio();
 
 function inicio(){
-    grid();
+    grid_principal();
+    limpar_campos()
+}
+
+function carregar_campos(){
+    formData = new FormData();
+    let numero = document.querySelector("#numero").value;
+    let id = document.querySelector("#id").value;
+
+    formData.append('numero', numero);
+    formData.append('id', id);
+
+    return formData;
+}
+
+function limpar_campos(){
+
+    let numero = document.querySelector("#numero").value = "";
+    let id = document.querySelector("#id").value = "";
+
+}
+
+function preencher_form(data){
+
+    let numero = data.numero;
+    let id = data.id;
+    
+    $('#modal_principal').modal('show')
+    document.querySelector("#numero").value = numero
+    document.querySelector("#id").value = id
+    
 }
 
 $(document).on('click','#abrir_modal',function(){
     $('#modal_principal').modal('show')
 })
 
-function grid(){
+$(document).on('click','#salvar',function(){
+    formData = carregar_campos()
+    id = formData.get("id");
 
-    var formData = new FormData();
-    formData.append('class', 'OCController');
+    if(id){
+        update(formData)
+    }else{
+        criar(formData)
+    }
+
+})
+
+$(document).on('click','#remover',function(){
+    
+    id = $(this).attr("data-id");
+    
+    var res = confirm("Deseja remover o registro?");
+    if (res == true) {
+        remover(id);
+    } else {
+    
+    }
+    
+    
+})
+
+
+$(document).on('click','#edit',function(){
+
+    $('#modal_principal').modal('show')
+    id = $(this).attr("data-id");
+    edit(id);
+    
+})
+
+
+function grid_principal(){
+
+    formData = new FormData();
+    formData.append('class', controller);
     formData.append('method', 'read');
 
     fetch(base_request,{
@@ -29,8 +98,8 @@ function grid(){
             `
                 <tr>
                     <td>${dados[linha].numero}</td>
-                    <td><img src="./icons/001-pencil.png" alt=""></td>
-                    <td><img src="./icons/002-delete.png" alt=""></td>
+                    <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
+                    <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>
             `
         }
@@ -40,12 +109,11 @@ function grid(){
 }
 
 // CRIAR
-function criar(){
+function criar(formData){
 
-    var formData = new FormData();
-    formData.append('class', 'Calsse');
-    formData.append('method', 'metodo');
-    formData.append('nome', 'luiz');
+    formData = carregar_campos();
+    formData.append('class', controller);
+    formData.append('method', 'create');
     
         fetch(base_request,{
             method:'post',
@@ -53,19 +121,63 @@ function criar(){
         })
         .then(response => response.json())
         .then(data => {        
-            console.log(data)
+            inicio()
         })
         .catch(console.error);
 }
 
-
-
-// fetch(base_request, {
-//   method: 'post',
-//   body: formData
-// })
-// .then(response => response.json())
-// .catch(error => console.error('Error:', error))
-// .then(response => console.log('Success:', JSON.stringify(response)))
+function remover(id){
     
+    formData = new FormData();
+    formData.append('class', controller);
+    formData.append('method', 'delete');
+    formData.append('id', id);
+    
+        fetch(base_request,{
+            method:'post',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {     
+            inicio()
+        })
+        .catch(console.error);
+}
+
+function edit(id){
+
+    formData = new FormData();
+    formData.append('class', controller);
+    formData.append('method', 'getId');
+    formData.append('id', id);
+    
+        fetch(base_request,{
+            method:'post',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {        
+            $linha = data.result_array[0];
+            preencher_form($linha);
+
+        })
+        .catch(console.error);
+}
+
+function update(formData){
+
+    formData.append('class', controller);
+    formData.append('method', 'update');
+    
+        fetch(base_request,{
+            method:'post',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {     
+            inicio()
+        })
+        .catch(console.error);
+}
+
 })

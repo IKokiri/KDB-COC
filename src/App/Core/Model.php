@@ -15,5 +15,12 @@ class Model {
         $this->conn = Database::getConnect();
         $this->log = new Log();
     }   
+
+    function populate($object)
+    {
+        foreach ($object as $key => $attrib) {
+            $this->$key = $attrib;
+        }
+    }
     
 }

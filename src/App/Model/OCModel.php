@@ -9,20 +9,49 @@ use PDO;
 
 class OCModel extends Model{
 
-    function get(){
+    private $table = "`coc`.`ordem_compra`";
+    private $model = "OCModel";
+    private $usuario = "USER";
+
+    function read(){
         
-        $sql = "SELECT * FROM `coc`.`ordem_compra`";
+        $sql = "SELECT * FROM ".$this->table;
 
         $query = $this->conn->prepare($sql);
 
         $result = Database::executa($query);   
 
+        $this->log->setInfo("O usuário $this->usuario buscou ($this->model read) os registros");
+
+        return $result;
+
+    }
+
+
+    function getId($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT * FROM ".$this->table." 
+        WHERE `id` = :id;";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("O usuário $this->usuario buscou ($this->model getId) o registro $this->id");
+
         return $result;
     }
 
-    function save($data){
 
-        $sql = "INSERT INTO `coc`.`ordem_compra`
+    function create($data){
+        
+        $this->populate($data);
+        
+        $sql = "INSERT INTO ".$this->table." 
                     (`numero`,
                     `criado`)
                     VALUES
@@ -31,40 +60,50 @@ class OCModel extends Model{
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', 12, PDO::PARAM_STR);
+        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
 
-        $result = Database::executa($query);   
+        $result = Database::executa($query); 
+          
+        $this->log->setInfo("O usuário $this->usuario criou ($this->model create) o registro ". $this->conn->lastInsertId());
 
         return $result;
     }
 
     function update($data){
 
-        $sql = "UPDATE `coc`.`ordem_compra`
+        $this->populate($data);
+
+        $sql = "UPDATE ".$this->table." 
                     SET
                     `numero` = :numero
                     WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', 123123123123, PDO::PARAM_STR);
-        $query->bindValue(':id', 1, PDO::PARAM_STR);
+        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
+        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
+
+        $this->log->setInfo("O usuário $this->usuario atualizaou ($this->model update) o registro $this->id");
 
         return $result;
     }
 
-    function delete($id){
+    function delete($data){
 
-        $sql = "DELETE FROM `coc`.`ordem_compra`
+        $this->populate($data);
+
+        $sql = "DELETE FROM ".$this->table." 
                     WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':id', 1, PDO::PARAM_STR);
+        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
+
+        $this->log->setInfo("O usuário $this->usuario removeu ($this->model delete) o registro $this->id");
         
         return $result;
     }
