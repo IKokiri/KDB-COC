@@ -21,7 +21,7 @@ class OCModel extends Model{
 
         $result = Database::executa($query);   
 
-        $this->log->setInfo("O usuário $this->usuario buscou ($this->model read) os registros");
+        $this->log->setInfo("Buscou ($this->model read) os registros");
 
         return $result;
 
@@ -41,7 +41,7 @@ class OCModel extends Model{
 
         $result = Database::executa($query);   
 
-        $this->log->setInfo("O usuário $this->usuario buscou ($this->model getId) o registro $this->id");
+        $this->log->setInfo("Buscou ($this->model getId) o registro $this->id");
 
         return $result;
     }
@@ -64,7 +64,7 @@ class OCModel extends Model{
 
         $result = Database::executa($query); 
           
-        $this->log->setInfo("O usuário $this->usuario criou ($this->model create) o registro ". $this->conn->lastInsertId());
+        $this->log->setInfo("Criou ($this->model create) o registro ". $this->conn->lastInsertId());
 
         return $result;
     }
@@ -85,7 +85,7 @@ class OCModel extends Model{
 
         $result = Database::executa($query);   
 
-        $this->log->setInfo("O usuário $this->usuario atualizaou ($this->model update) o registro $this->id");
+        $this->log->setInfo("Atualizaou ($this->model update) o registro $this->id");
 
         return $result;
     }
@@ -103,7 +103,7 @@ class OCModel extends Model{
 
         $result = Database::executa($query);   
 
-        $this->log->setInfo("O usuário $this->usuario removeu ($this->model delete) o registro $this->id");
+        $this->log->setInfo("Removeu ($this->model delete) o registro $this->id");
         
         return $result;
     }

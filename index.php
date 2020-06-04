@@ -1,6 +1,9 @@
 <?php
-
+session_start();
 require_once "./vendor/autoload.php";
+
+$_SESSION['email'] = "p.augusto@kuttner.com.br";
+$_SESSION['senha'] = "1234567890";
 
 $request = $_REQUEST;
 

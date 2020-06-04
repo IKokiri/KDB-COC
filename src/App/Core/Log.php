@@ -10,8 +10,11 @@ class Log {
 
     protected $logInfo;
     protected $logWarning;
+    private $user;
 
     function __construct(){
+        $this->user = $_SESSION['email'];
+
         $this->logInfo = new Logger('info');
         $this->logWarning = new Logger('warning');
 
@@ -21,15 +24,10 @@ class Log {
     
    
     public function setInfo($log) {
-
-        $this->logInfo->info($log);
-
-    }
-       
-    public function setWarning($log) {
-
-        $this->logWarning->warning($log);
+        
+        $this->logInfo->info($this->user." ".$log);
 
     }
+
 
 }
