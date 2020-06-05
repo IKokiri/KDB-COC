@@ -1,5 +1,7 @@
 const base_request = "http://localhost:8000"
-const controller = "OCController"
+const controller = "UsuarioOrdemCompraController"
+const UsuarioController = "UsuarioController"
+const OCController = "OCController"
 
 $(document).ready(function(){
 
@@ -8,15 +10,20 @@ inicio();
 function inicio(){
     grid_principal();
     limpar_campos()
+    carregar_ocs();
+    carregar_usuarios()
     $('#modal_principal').modal('hide')
 }
 
 function carregar_campos(){
+
     formData = new FormData();
-    let numero = document.querySelector("#numero").value;
+    let id_usuario = document.querySelector("#id_usuario").value;
+    let id_ordem_compra = document.querySelector("#id_ordem_compra").value;
     let id = document.querySelector("#id").value;
 
-    formData.append('numero', numero);
+    formData.append('id_usuario', id_usuario);
+    formData.append('id_ordem_compra', id_ordem_compra);
     formData.append('id', id);
 
     return formData;
@@ -24,18 +31,22 @@ function carregar_campos(){
 
 function limpar_campos(){
 
-    let numero = document.querySelector("#numero").value = "";
+    let id_usuario = document.querySelector("#id_usuario").value = "";
+    let id_ordem_compra = document.querySelector("#id_ordem_compra").value = "";
     let id = document.querySelector("#id").value = "";
 
 }
 
 function preencher_form(data){
 
-    let numero = data.numero;
+    let id_usuario = data.id_usuario;
+    let id_ordem_compra = data.id_ordem_compra;
     let id = data.id;
     
+    
     $('#modal_principal').modal('show')
-    document.querySelector("#numero").value = numero
+    document.querySelector("#id_usuario").value = id_usuario
+    document.querySelector("#id_ordem_compra").value = id_ordem_compra
     document.querySelector("#id").value = id
     
 }
@@ -43,6 +54,10 @@ function preencher_form(data){
 $(document).on('click','#abrir_modal',function(){
     $('#modal_principal').modal('show')
 })
+
+$('#modal_principal').on('hidden.bs.modal', function () {
+    document.querySelector("#id").value = ""
+  })
 
 $(document).on('click','#salvar',function(){
     formData = carregar_campos()
@@ -98,7 +113,8 @@ function grid_principal(){
             grid += 
             `
                 <tr>
-                    <td>${dados[linha].numero}</td>
+                    <td>${dados[linha].id_usuario}</td>
+                    <td>${dados[linha].id_ordem_compra}</td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>
@@ -111,6 +127,7 @@ function grid_principal(){
 
 // CRIAR
 function criar(formData){
+    
 
     formData = carregar_campos();
     formData.append('class', controller);
@@ -181,4 +198,54 @@ function update(formData){
         .catch(console.error);
 }
 
+function carregar_ocs(){
+
+    formData = new FormData();
+    formData.append('class', OCController);
+    formData.append('method', 'read');
+
+    fetch(base_request,{
+        method:'post',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {        
+        options = ""
+        dados = data.result_array
+        for(linha in dados){
+            options += `
+            <option value="${dados[linha].id}">
+            ${dados[linha].numero}
+            </option>
+            `
+        }
+        document.querySelector("#id_ordem_compra").innerHTML = options
+    })
+    .catch(console.error);
+}
+function carregar_usuarios(){
+
+    formData = new FormData();
+    formData.append('class', UsuarioController);
+    formData.append('method', 'read');
+
+    fetch(base_request,{
+        method:'post',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {        
+        options = ""
+        dados = data.result_array
+        for(linha in dados){
+            options += `
+            <option value="${dados[linha].id}">
+            ${dados[linha].email}
+            </option>
+            `
+        }
+        document.querySelector("#id_usuario").innerHTML = options
+    })
+    .catch(console.error);
+}
 })

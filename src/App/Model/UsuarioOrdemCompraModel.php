@@ -7,10 +7,10 @@ use App\Core\Model;
 use PDO;
 
 
-class OCModel extends Model{
+class UsuarioOrdemCompraModel extends Model{
 
-    private $table = "`coc`.`ordem_compra`";
-    private $model = "OCModel";
+    private $table = "`coc`.`usuario_ordem_compra`";
+    private $model = "UsuarioOrdemCompraModel";
     private $usuario = "USER";
 
     function read(){
@@ -27,7 +27,28 @@ class OCModel extends Model{
 
     }
 
+    function readForUser(){
+        
+        $sql = "select oco.numero,doc.nome,doc.path from `coc`.`usuario_ordem_compra` usu_oco
+        INNER JOIN `coc`.`usuarios` usu
+            on usu_oco.id_usuario = usu.id
+        INNER JOIN `coc`.`ordem_compra` oco
+            on usu_oco.id_ordem_compra = oco.id
+        INNER JOIN `coc`.`documentos` doc
+            on oco.id = doc.id_ordem_compra
+            WHERE usu.email = '".$_SESSION['email']."'";
 
+        $query = $this->conn->prepare($sql);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model readForUser) os registros");
+
+        return $result;
+
+    }
+
+ 
     function getId($data){
         
         $this->populate($data);
@@ -52,15 +73,19 @@ class OCModel extends Model{
         $this->populate($data);
         
         $sql = "INSERT INTO ".$this->table." 
-                    (`numero`,
+                    (`id_usuario`,
+                    `id_ordem_compra`,
                     `criado`)
                     VALUES
-                    (:numero,
+                    (:id_usuario,
+                    :id_ordem_compra,
                     curtime())";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
+        $query->bindValue(':id_usuario', $this->id_usuario, PDO::PARAM_STR);
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+        
 
         $result = Database::executa($query); 
           
@@ -74,16 +99,18 @@ class OCModel extends Model{
         $this->populate($data);
 
         $sql = "UPDATE ".$this->table." 
-                    SET
-                    `numero` = :numero,
-                    `editado` = curtime()
-                    WHERE `id` = :id;";
+                SET
+                `id_usuario` = :id_usuario,
+                `id_ordem_compra` = :id_ordem_compra,                
+                `editado` = curtime()
+                WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
-
+        $query->bindValue(':id_usuario', $this->id_usuario, PDO::PARAM_STR);        
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+      
         $result = Database::executa($query);   
 
         $this->log->setInfo("Atualizaou ($this->model update) o registro $this->id");

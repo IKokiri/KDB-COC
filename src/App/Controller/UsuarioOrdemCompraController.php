@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\OCModel as Model;
+use App\Model\UsuarioOrdemCompraModel as Model;
 
-class OCController {
+class UsuarioOrdemCompraController {
 
     private $model;
 
@@ -13,7 +13,7 @@ class OCController {
     }
 
     function create($data){
-        
+
         return $this->model->create($data);
     }
 
@@ -22,14 +22,19 @@ class OCController {
         return $this->model->read();
     }
 
+    function readForUser($data){
+        
+        return $this->model->readForUser();
+    }
+
+
     function getId($data){
         
         return $this->model->getId($data);
     }
 
-
     function update($data){
-
+    
         return $this->model->update($data);
     }
 

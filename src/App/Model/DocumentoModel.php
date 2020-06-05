@@ -7,10 +7,10 @@ use App\Core\Model;
 use PDO;
 
 
-class OCModel extends Model{
+class DocumentoModel extends Model{
 
-    private $table = "`coc`.`ordem_compra`";
-    private $model = "OCModel";
+    private $table = "`coc`.`documentos`";
+    private $model = "DocumentoModel";
     private $usuario = "USER";
 
     function read(){
@@ -26,7 +26,6 @@ class OCModel extends Model{
         return $result;
 
     }
-
 
     function getId($data){
         
@@ -52,15 +51,28 @@ class OCModel extends Model{
         $this->populate($data);
         
         $sql = "INSERT INTO ".$this->table." 
-                    (`numero`,
+                    (`nome`,
+                    `extensao`,
+                    `revisao`,
+                    `path`,
+                    `id_ordem_compra`,
                     `criado`)
                     VALUES
-                    (:numero,
+                    (:nome,
+                    :extensao,
+                    :revisao,
+                    :path,
+                    :id_ordem_compra,
                     curtime())";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
+        $query->bindValue(':nome', $this->nome, PDO::PARAM_STR);
+        $query->bindValue(':extensao', $this->extensao, PDO::PARAM_STR);
+        $query->bindValue(':revisao', $this->revisao, PDO::PARAM_STR);
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+        $query->bindValue(':path', $this->path, PDO::PARAM_STR);
+        
 
         $result = Database::executa($query); 
           
@@ -73,16 +85,33 @@ class OCModel extends Model{
 
         $this->populate($data);
 
+        $path = "";
+        if($this->path){
+            $path = "`extensao` = :extensao,`path` = :path,";
+        }
         $sql = "UPDATE ".$this->table." 
-                    SET
-                    `numero` = :numero,
-                    `editado` = curtime()
-                    WHERE `id` = :id;";
+                SET
+                `id` = :id,
+                `nome` = :nome,                
+                `revisao` = :revisao,
+                `id_ordem_compra` = :id_ordem_compra,
+                ".$path."
+                `editado` = curtime()
+                WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
+
+        if($this->path){
+            $query->bindValue(':extensao', $this->extensao, PDO::PARAM_STR);
+            $query->bindValue(':path', $this->path, PDO::PARAM_STR);
+        }
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $query->bindValue(':nome', $this->nome, PDO::PARAM_STR);        
+        $query->bindValue(':revisao', $this->revisao, PDO::PARAM_STR);
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+        
+
 
         $result = Database::executa($query);   
 

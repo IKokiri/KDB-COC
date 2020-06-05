@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\OCModel as Model;
+use App\Model\UsuarioModel as Model;
 
-class OCController {
+class UsuarioController {
 
     private $model;
 
@@ -13,7 +13,7 @@ class OCController {
     }
 
     function create($data){
-        
+
         return $this->model->create($data);
     }
 
@@ -27,9 +27,8 @@ class OCController {
         return $this->model->getId($data);
     }
 
-
     function update($data){
-
+    
         return $this->model->update($data);
     }
 

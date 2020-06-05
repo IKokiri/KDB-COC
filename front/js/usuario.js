@@ -1,5 +1,5 @@
 const base_request = "http://localhost:8000"
-const controller = "OCController"
+const controller = "UsuarioController"
 
 $(document).ready(function(){
 
@@ -12,11 +12,16 @@ function inicio(){
 }
 
 function carregar_campos(){
+
+    inputFile = document.querySelector('input[type="file"]')
+
     formData = new FormData();
-    let numero = document.querySelector("#numero").value;
+    let email = document.querySelector("#email").value;
+    let senha = document.querySelector("#senha").value;
     let id = document.querySelector("#id").value;
 
-    formData.append('numero', numero);
+    formData.append('email', email);
+    formData.append('senha', senha);
     formData.append('id', id);
 
     return formData;
@@ -24,18 +29,22 @@ function carregar_campos(){
 
 function limpar_campos(){
 
-    let numero = document.querySelector("#numero").value = "";
+    let email = document.querySelector("#email").value = "";
+    let senha = document.querySelector("#senha").value = "";
     let id = document.querySelector("#id").value = "";
 
 }
 
 function preencher_form(data){
 
-    let numero = data.numero;
+    let email = data.email;
+    let senha = data.senha;
     let id = data.id;
     
+    
     $('#modal_principal').modal('show')
-    document.querySelector("#numero").value = numero
+    document.querySelector("#email").value = email
+    document.querySelector("#senha").value = senha
     document.querySelector("#id").value = id
     
 }
@@ -43,6 +52,10 @@ function preencher_form(data){
 $(document).on('click','#abrir_modal',function(){
     $('#modal_principal').modal('show')
 })
+
+$('#modal_principal').on('hidden.bs.modal', function () {
+    document.querySelector("#id").value = ""
+  })
 
 $(document).on('click','#salvar',function(){
     formData = carregar_campos()
@@ -98,7 +111,7 @@ function grid_principal(){
             grid += 
             `
                 <tr>
-                    <td>${dados[linha].numero}</td>
+                    <td>${dados[linha].email}</td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>
@@ -111,6 +124,7 @@ function grid_principal(){
 
 // CRIAR
 function criar(formData){
+    
 
     formData = carregar_campos();
     formData.append('class', controller);
@@ -180,5 +194,6 @@ function update(formData){
         })
         .catch(console.error);
 }
+
 
 })

@@ -7,11 +7,10 @@ use App\Core\Model;
 use PDO;
 
 
-class OCModel extends Model{
+class UsuarioModel extends Model{
 
-    private $table = "`coc`.`ordem_compra`";
-    private $model = "OCModel";
-    private $usuario = "USER";
+    private $table = "`coc`.`usuarios`";
+    private $model = "UsuarioModel";
 
     function read(){
         
@@ -52,16 +51,19 @@ class OCModel extends Model{
         $this->populate($data);
         
         $sql = "INSERT INTO ".$this->table." 
-                    (`numero`,
+                    (`email`,
+                    `senha`,
                     `criado`)
                     VALUES
-                    (:numero,
+                    (:email,
+                    :senha,
                     curtime())";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
-
+        $query->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $query->bindValue(':senha', $this->senha, PDO::PARAM_STR);
+        
         $result = Database::executa($query); 
           
         $this->log->setInfo("Criou ($this->model create) o registro ". $this->conn->lastInsertId());
@@ -74,16 +76,18 @@ class OCModel extends Model{
         $this->populate($data);
 
         $sql = "UPDATE ".$this->table." 
-                    SET
-                    `numero` = :numero,
-                    `editado` = curtime()
-                    WHERE `id` = :id;";
+                SET
+                `email` = :email,
+                `senha` = :senha,                
+                `editado` = curtime()
+                WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
-
+        $query->bindValue(':email', $this->email, PDO::PARAM_STR);        
+        $query->bindValue(':senha', $this->senha, PDO::PARAM_STR);
+      
         $result = Database::executa($query);   
 
         $this->log->setInfo("Atualizaou ($this->model update) o registro $this->id");
