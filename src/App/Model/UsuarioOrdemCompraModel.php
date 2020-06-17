@@ -15,7 +15,11 @@ class UsuarioOrdemCompraModel extends Model{
 
     function read(){
         
-        $sql = "SELECT * FROM ".$this->table;
+        $sql = "SELECT usu_ord.id,ord.numero,usu.email FROM $this->table usu_ord
+        INNER JOIN coc.ordem_compra ord
+        on usu_ord.id_ordem_compra = ord.id
+        INNER JOIN coc.usuarios usu
+        on usu_ord.id_usuario = usu.id";
 
         $query = $this->conn->prepare($sql);
 
@@ -29,7 +33,7 @@ class UsuarioOrdemCompraModel extends Model{
 
     function readForUser(){
         
-        $sql = "select oco.numero,doc.nome,doc.path from `coc`.`usuario_ordem_compra` usu_oco
+        $sql = "SELECT oco.numero,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `coc`.`usuario_ordem_compra` usu_oco
         INNER JOIN `coc`.`usuarios` usu
             on usu_oco.id_usuario = usu.id
         INNER JOIN `coc`.`ordem_compra` oco
@@ -48,6 +52,28 @@ class UsuarioOrdemCompraModel extends Model{
 
     }
 
+    function dataMail($data){
+
+        $this->populate($data);
+
+        $sql = "SELECT usu.email,ord.numero FROM
+            coc.usuario_ordem_compra usuoc
+                INNER JOIN coc.usuarios usu
+                on usuoc.id_usuario = usu.id
+                INNER JOIN coc.ordem_compra ord
+                on usuoc.id_ordem_compra = ord.id
+            WHERE id_ordem_compra = :id_ordem_compra";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model dataMail) o registro $this->id_ordem_compra");
+
+        return $result;
+    }
  
     function getId($data){
         

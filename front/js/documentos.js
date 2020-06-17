@@ -18,14 +18,13 @@ function carregar_campos(){
     inputFile = document.querySelector('input[type="file"]')
 
     formData = new FormData();
-    let nome = document.querySelector("#nome").value;
-    let revisao = document.querySelector("#revisao").value;
     let id = document.querySelector("#id").value;
     let id_ordem_compra = document.querySelector("#id_ordem_compra").value;
 
-    formData.append('nome', nome);
-    formData.append('revisao', revisao);
-    formData.append('file', inputFile.files[0]);
+    
+    for(f in inputFile.files){
+        formData.append('file'+f, inputFile.files[f]);
+    }
     formData.append('id_ordem_compra', id_ordem_compra);
     formData.append('id', id);
 
@@ -34,8 +33,6 @@ function carregar_campos(){
 
 function limpar_campos(){
 
-    let nome = document.querySelector("#nome").value = "";
-    let revisao = document.querySelector("#revisao").value = "";
     let file = document.querySelector("#file").value = "";
     let id = document.querySelector("#id").value = "";
     let id_ordem_compra = document.querySelector("#id_ordem_compra").value = "";
@@ -44,15 +41,11 @@ function limpar_campos(){
 
 function preencher_form(data){
 
-    let nome = data.nome;
-    let revisao = data.revisao;
     let id = data.id;
     let id_ordem_compra = data.id_ordem_compra;
     
     
     $('#modal_principal').modal('show')
-    document.querySelector("#nome").value = nome
-    document.querySelector("#revisao").value = revisao
     document.querySelector("#id").value = id
     document.querySelector("#id_ordem_compra").value = id_ordem_compra
     
@@ -121,11 +114,10 @@ function grid_principal(){
             `
                 <tr>
                     <td>${dados[linha].nome}</td>
-                    <td>${dados[linha].revisao}</td>
-                    <td>${dados[linha].id_ordem_compra}</td>
+                    <td>${dados[linha].numero}</td>
                     <td>
                         <a href="${base_request}/src/docs/${dados[linha].path}" target="_blank">
-                            <img src="./icons/ext/cad.png">
+                            <img src="./icons/ext/${dados[linha].extensao}.png">
                         </a>
                     </td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>

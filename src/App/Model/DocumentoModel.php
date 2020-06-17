@@ -15,7 +15,9 @@ class DocumentoModel extends Model{
 
     function read(){
         
-        $sql = "SELECT * FROM ".$this->table;
+        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao FROM $this->table doc
+                    INNER JOIN coc.ordem_compra ord
+                        on doc.id_ordem_compra = ord.id";
 
         $query = $this->conn->prepare($sql);
 
@@ -53,14 +55,12 @@ class DocumentoModel extends Model{
         $sql = "INSERT INTO ".$this->table." 
                     (`nome`,
                     `extensao`,
-                    `revisao`,
                     `path`,
                     `id_ordem_compra`,
                     `criado`)
                     VALUES
                     (:nome,
                     :extensao,
-                    :revisao,
                     :path,
                     :id_ordem_compra,
                     curtime())";
@@ -69,7 +69,6 @@ class DocumentoModel extends Model{
         
         $query->bindValue(':nome', $this->nome, PDO::PARAM_STR);
         $query->bindValue(':extensao', $this->extensao, PDO::PARAM_STR);
-        $query->bindValue(':revisao', $this->revisao, PDO::PARAM_STR);
         $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
         $query->bindValue(':path', $this->path, PDO::PARAM_STR);
         
@@ -86,14 +85,14 @@ class DocumentoModel extends Model{
         $this->populate($data);
 
         $path = "";
+        
         if($this->path){
-            $path = "`extensao` = :extensao,`path` = :path,";
+            $path = "`extensao` = :extensao,`path` = :path,`nome` = :nome,  ";
         }
+
         $sql = "UPDATE ".$this->table." 
                 SET
-                `id` = :id,
-                `nome` = :nome,                
-                `revisao` = :revisao,
+                `id` = :id,              
                 `id_ordem_compra` = :id_ordem_compra,
                 ".$path."
                 `editado` = curtime()
@@ -104,11 +103,11 @@ class DocumentoModel extends Model{
         if($this->path){
             $query->bindValue(':extensao', $this->extensao, PDO::PARAM_STR);
             $query->bindValue(':path', $this->path, PDO::PARAM_STR);
+            $query->bindValue(':nome', $this->nome, PDO::PARAM_STR);
         }
         
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
         $query->bindValue(':nome', $this->nome, PDO::PARAM_STR);        
-        $query->bindValue(':revisao', $this->revisao, PDO::PARAM_STR);
         $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
         
 

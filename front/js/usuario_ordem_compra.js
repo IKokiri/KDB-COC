@@ -113,8 +113,8 @@ function grid_principal(){
             grid += 
             `
                 <tr>
-                    <td>${dados[linha].id_usuario}</td>
-                    <td>${dados[linha].id_ordem_compra}</td>
+                    <td>${dados[linha].email}</td>
+                    <td>${dados[linha].numero}</td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>

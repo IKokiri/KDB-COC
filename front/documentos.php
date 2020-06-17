@@ -1,3 +1,6 @@
+<?php
+  include "nav.php"
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,7 +9,7 @@
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
-    <title>OCs</title>
+    <title>Documentos</title>
 </head>
 <body>
     
@@ -17,7 +20,9 @@
     <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">OC</th>
+            <th scope="col">Download</th>
             <th scope="col">Alterar</th>
             <th scope="col">Remover</th>
           </tr>
@@ -31,7 +36,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Documento</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -40,10 +45,17 @@
           <!-- FORM -->
           <form>
             <div class="form-row">
+
               <div class="form-group col-md-6">
-                <label for="inputEmail4">Número da OC:</label>
-                <input type="number" class="form-control" id="numero">
-              </div>
+                <label for="inputEmail4">OC</label>
+                <select class="form-control" id="id_ordem_compra">
+
+                </select>
+              </div>        
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlFile1"></label>
+              <input type="file" class="form-control-file" name="file[]" id="file" multiple="multiple">
             </div>
             <input type="hidden" id="id">
           </form>
@@ -57,11 +69,10 @@
     </div>
   </div>
 
-
     
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="./js/ordem_compra.js"></script>
+  <?php
+      include "footer.php"
+    ?>
+    <script src="./js/documentos.js"></script>
 </body>
 </html>
