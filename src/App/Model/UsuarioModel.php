@@ -45,6 +45,25 @@ class UsuarioModel extends Model{
         return $result;
     }
 
+    function getLogin($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT * FROM coc.usuarios
+        WHERE email = :email and senha = :senha";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $query->bindValue(':senha', $this->senha, PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("$this->email Buscou ($this->model getLogin)");
+
+        return $result;
+    }
+    
 
     function create($data){
         

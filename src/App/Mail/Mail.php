@@ -15,18 +15,14 @@ class Mail{
     }
 
     function config(){
-        //Server settings
-        // $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-        $this->mail->isSMTP();                                            // Send using SMTP
-        $this->mail->Host       = 'mail.kuttner.com.br';                    // Set the SMTP server to send through
-        // $this->mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $this->mail->Username   = 'ordemcompra@kuttner.com.br';                     // SMTP username
-        $this->mail->Password   = '';                               // SMTP password
-        // $this->mail->SMTPSecure = 'ssl';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        // $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+        $this->mail->isSMTP();                                            
+        $this->mail->Host       = 'mail.kuttner.com.br';                  
+        $this->mail->Username   = 'ordemcompra@kuttner.com.br';           
+        $this->mail->Password   = '';                            
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPAutoTLS = false;
         $this->mail->Port       = 587;     
-        //Recipients
         $this->mail->setFrom('ordemcompra@kuttner.com.br', 'Ordem de Compra KdB');
     }
 
@@ -43,11 +39,9 @@ class Mail{
             $this->mail->Subject = $assunto;
             $this->mail->Body    = $corpo;
             $this->mail->AltBody = $corpo;
-        // DESCOMENTAR DESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTARDESCOMENTAR
             $this->mail->send();
-            // echo 'Message has been sent';
         } catch (Exception $e) {
-            // echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
+            return "Não enviado";
         }
     }
 
