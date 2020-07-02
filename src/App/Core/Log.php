@@ -18,8 +18,10 @@ class Log {
         $this->logInfo = new Logger('info');
         $this->logWarning = new Logger('warning');
 
-        $this->logWarning->pushHandler(new StreamHandler('coc.log', Logger::WARNING));
-        $this->logInfo->pushHandler(new StreamHandler('coc.log', Logger::INFO));
+        $logName = "logs/".date('Ymd').".log";
+
+        $this->logWarning->pushHandler(new StreamHandler($logName, Logger::WARNING));
+        $this->logInfo->pushHandler(new StreamHandler($logName, Logger::INFO));
     }
     
    

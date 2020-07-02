@@ -39,7 +39,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="visualizacao_ocs.php">Minhas OCs</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link text-danger" href="/coc/front/">Sair</a>
+              </li>
           </ul>
+        </div>
+
+        <div class="pull-right">
+          <span id="usuario_ativo"></span>
         </div>
       </nav>
 </body>

@@ -14,6 +14,7 @@
         <thead>
           <tr>
             <th scope="col">Email</th>
+            <th scope="col">Permissao</th>
             <th scope="col">Alterar</th>
             <th scope="col">Remover</th>
           </tr>
@@ -44,6 +45,14 @@
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Senha</label>
                 <input type="password" class="form-control" id="senha">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">Permissão</label>
+                <select  class="form-control" name="permissao" id="permissao">
+                  <option value="0">Padrão</option>
+                  <option value="1">Adminsitrador</option>
+                </select>
               </div>
               
             </div>

@@ -19,7 +19,7 @@ class Mail{
         $this->mail->isSMTP();                                            
         $this->mail->Host       = 'mail.kuttner.com.br';                  
         $this->mail->Username   = 'ordemcompra@kuttner.com.br';           
-        $this->mail->Password   = '';                            
+        $this->mail->Password   = '!@KdB2020';                            
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPAutoTLS = false;
         $this->mail->Port       = 587;     

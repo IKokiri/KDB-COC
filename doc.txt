@@ -1,0 +1,11 @@
+- Os usuários devem autenticar no sitema.
+
+- O administrador pode criar uma pasta (OC)
+- O administrador pode incluir arquivos na OC
+- O Administrador pode gerenciar os usuários
+- O administrador pode vincular usuários com OCs
+
+- Usuários comuns só acessam o módulo de visualizaão de OCs
+
+
+-Todos os usuários acessam apenas OCs vinculadas à eles.

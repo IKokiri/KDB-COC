@@ -1,4 +1,3 @@
-const base_request = "http://localhost:8000"
 const controller = "OCController"
 
 $(document).ready(function(){

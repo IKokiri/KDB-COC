@@ -1,4 +1,3 @@
-const base_request = "http://localhost:8000"
 const controller = "UsuarioController"
 
 $(document).ready(function(){
@@ -18,10 +17,12 @@ function carregar_campos(){
     formData = new FormData();
     let email = document.querySelector("#email").value;
     let senha = document.querySelector("#senha").value;
+    let permissao = document.querySelector("#permissao").value;
     let id = document.querySelector("#id").value;
 
     formData.append('email', email);
     formData.append('senha', senha);
+    formData.append('permissao', permissao);
     formData.append('id', id);
 
     return formData;
@@ -31,6 +32,7 @@ function limpar_campos(){
 
     let email = document.querySelector("#email").value = "";
     let senha = document.querySelector("#senha").value = "";
+    let permissao = document.querySelector("#permissao").value = 0;
     let id = document.querySelector("#id").value = "";
 
 }
@@ -39,12 +41,14 @@ function preencher_form(data){
 
     let email = data.email;
     let senha = data.senha;
+    let permissao = data.permissao;
     let id = data.id;
     
     
     $('#modal_principal').modal('show')
     document.querySelector("#email").value = email
     document.querySelector("#senha").value = senha
+    document.querySelector("#permissao").value = permissao
     document.querySelector("#id").value = id
     
 }
@@ -80,9 +84,7 @@ $(document).on('click','#remover',function(){
     
     }
     
-    
 })
-
 
 $(document).on('click','#edit',function(){
 
@@ -112,6 +114,7 @@ function grid_principal(){
             `
                 <tr>
                     <td>${dados[linha].email}</td>
+                    <td>${dados[linha].permissao}</td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>

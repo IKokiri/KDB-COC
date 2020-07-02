@@ -20,8 +20,13 @@ class LoginController {
         
         $_SESSION['email'] = $user['email'];
         $_SESSION['senha'] = $user['senha'];
-        $_SESSION['id'] = $user['id'];;
+        $_SESSION['id'] = $user['id'];
 
+        return $result;
+    }
+
+    function deslogar(){
+        session_destroy();
         return $result;
     }
 

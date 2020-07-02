@@ -14,5 +14,7 @@ $class = new $namespace;
 
 $result = call_user_func_array(array($class, $method), array($params));
 
+$result['user'] = $_SESSION['email'];
+
 echo json_encode($result);
 

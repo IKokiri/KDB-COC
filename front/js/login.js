@@ -1,11 +1,28 @@
-const base_request = "http://localhost:8000"
 const controller = "LoginController"
 
 $(document).ready(function(){
+    
+    deslogar();
 
 $(document).on('click','#entrar',function(){
     getLogin();
 })
+
+function deslogar(){
+    formData = new FormData();
+    formData.append('class', controller);
+    formData.append('method', 'deslogar');
+    
+    fetch(base_request,{
+        method:'post',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {        
+        
+    })
+    .catch(console.error);
+}
 
 function getLogin(formData){
 
@@ -23,8 +40,9 @@ function getLogin(formData){
         body: formData
     })
     .then(response => response.json())
-    .then(data => {        
-        window.location.href = "http://localhost:8000/front/visualizacao_ocs.php"; 
+    .then(data => {     
+        if(data.count==1)   
+            window.location.href = `${base_front}/visualizacao_ocs.php`; 
     })
     .catch(console.error);
 }

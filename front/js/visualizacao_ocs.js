@@ -1,4 +1,3 @@
-const base_request = "http://localhost:8000"
 const controller = "UsuarioOrdemCompraController"
 const downloadDocumentoController = "DownloadDocumentoController"
 
@@ -31,7 +30,7 @@ function grid_principal(){
                     <td>${dados[linha].numero}</td>
                     <td>${dados[linha].nome}</td>
                     <td>
-                        <a id="download" data-iddocumento="${dados[linha].id_documento}" href="${base_request}/src/docs/${dados[linha].path}" target="_blank">
+                        <a id="download" data-iddocumento="${dados[linha].id_documento}" href="${base}/src/docs/${dados[linha].path}" target="_blank">
                             <img src="./icons/ext/${dados[linha].extensao}.png">
                         </a>
                     </td>
@@ -44,8 +43,10 @@ function grid_principal(){
                     </td>
                 </tr>
             `
+        
         }
         document.querySelector(".grid").innerHTML = grid
+        document.querySelector("#usuario_ativo").innerHTML = data.user
     })
     .catch(console.error);
 }

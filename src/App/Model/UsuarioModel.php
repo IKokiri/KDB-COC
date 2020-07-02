@@ -72,16 +72,19 @@ class UsuarioModel extends Model{
         $sql = "INSERT INTO ".$this->table." 
                     (`email`,
                     `senha`,
+                    `permissao`,
                     `criado`)
                     VALUES
                     (:email,
                     :senha,
+                    :permissao,
                     curtime())";
 
         $query = $this->conn->prepare($sql);
         
         $query->bindValue(':email', $this->email, PDO::PARAM_STR);
         $query->bindValue(':senha', $this->senha, PDO::PARAM_STR);
+        $query->bindValue(':permissao', $this->permissao, PDO::PARAM_STR);
         
         $result = Database::executa($query); 
           
@@ -97,7 +100,8 @@ class UsuarioModel extends Model{
         $sql = "UPDATE ".$this->table." 
                 SET
                 `email` = :email,
-                `senha` = :senha,                
+                `senha` = :senha,
+                `permissao` = :permissao,                 
                 `editado` = curtime()
                 WHERE `id` = :id;";
 
@@ -105,6 +109,7 @@ class UsuarioModel extends Model{
         
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
         $query->bindValue(':email', $this->email, PDO::PARAM_STR);        
+        $query->bindValue(':permissao', $this->permissao, PDO::PARAM_STR);  
         $query->bindValue(':senha', $this->senha, PDO::PARAM_STR);
       
         $result = Database::executa($query);   
