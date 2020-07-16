@@ -5,8 +5,9 @@ namespace App\Mail;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use App\Mail\InfoMail;
 
-class Mail{
+class Mail extends InfoMail{
 
     private $mail;
 
@@ -15,11 +16,11 @@ class Mail{
     }
 
     function config(){
-        // $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+        // $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;   
         $this->mail->isSMTP();                                            
-        $this->mail->Host       = 'mail.kuttner.com.br';                  
-        $this->mail->Username   = 'ordemcompra@kuttner.com.br';           
-        $this->mail->Password   = '!@KdB2020';                            
+        $this->mail->Host       = $this->host;                  
+        $this->mail->Username   = $this->username;           
+        $this->mail->Password   = $this->password; 
         $this->mail->SMTPAuth = true;
         $this->mail->SMTPAutoTLS = false;
         $this->mail->Port       = 587;     

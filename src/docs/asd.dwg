@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Diablo II Evolution
-Exec=env WINEPREFIX="/home/mendes/.wine" wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/mendes/.wine/dosdevices/c:/users/Public/Desktop/Diablo\\ II\\ Evolution.lnk
-Type=Application
-StartupNotify=true
-Path=/home/mendes/.wine/dosdevices/c:/Program Files (x86)/Diablo II Evolution
-Icon=421B_iconlod.0
-StartupWMClass=diablo ii.exe

@@ -21,7 +21,13 @@ class LoginController {
         $_SESSION['email'] = $user['email'];
         $_SESSION['senha'] = $user['senha'];
         $_SESSION['id'] = $user['id'];
+        $_SESSION['permissao'] = $user['permissao'];
 
+        return $result;
+    }
+
+    function verificarLogado(){
+        $result = $this->model->verificarLogado();
         return $result;
     }
 

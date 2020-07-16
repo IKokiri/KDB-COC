@@ -137,5 +137,27 @@ class UsuarioModel extends Model{
         return $result;
     }
 
+    function verificarLogado(){
+
+        $this->populate($data);
+
+        $sql = "SELECT * FROM coc.usuarios
+        WHERE email = :email and senha = :senha and id = :id and permissao = :permissao";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':email', $_SESSION['email'], PDO::PARAM_STR);
+        $query->bindValue(':senha', $_SESSION['senha'], PDO::PARAM_STR);
+        $query->bindValue(':id', $_SESSION['id'], PDO::PARAM_STR);
+        $query->bindValue(':permissao', $_SESSION['permissao'], PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("$this->email Buscou ($this->model verificarLogado)");
+
+        return $result;
+
+    }
+
 }
 

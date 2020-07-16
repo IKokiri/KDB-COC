@@ -40,7 +40,7 @@
                 <a class="nav-link" href="visualizacao_ocs.php">Minhas OCs</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-danger" href="/coc/front/">Sair</a>
+                <a class="nav-link text-danger" href="/front/">Sair</a>
               </li>
           </ul>
         </div>
