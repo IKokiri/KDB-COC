@@ -3,4 +3,4 @@ server.js
 InfoDB.php
 InfoMail.php
 *.log
-/docs/
+/docs
