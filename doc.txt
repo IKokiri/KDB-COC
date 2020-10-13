@@ -8,4 +8,4 @@
 - Usuários comuns só acessam o módulo de visualizaão de OCs
 
 
--Todos os usuários acessam apenas OCs vinculadas à eles.
+- Todos os usuários acessam apenas OCs vinculadas à eles.

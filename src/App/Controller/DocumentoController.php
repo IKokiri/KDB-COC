@@ -43,13 +43,15 @@ class DocumentoController {
     function create($data){
      
         $files = $data['files'];
+   
+            $arqNomes = "<br><br>";
+        foreach($files as $file){  
 
-        foreach($files as $file){     
-            
             $name = explode(".",$file['name']);
             $nome = $name[0];
             $extensao =  end($name);
             $nomeCompleto = $nome.".".$extensao;
+            $arqNomes .= $nomeCompleto."<br>";
             $path = "./src/docs/".$nomeCompleto;
             $file['extensao'] = $extensao;
             $file['path'] = $nomeCompleto;
@@ -60,9 +62,12 @@ class DocumentoController {
             move_uploaded_file($file['tmp_name'], $path);
             $this->model->create($data);
 
-            $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Adicionado");
+            // $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Adicionado");
             
         }
+        
+        $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionado");
+
         return ['ok'];
     }
 

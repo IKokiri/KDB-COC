@@ -1,45 +1,49 @@
 <?php
 use App\Controller\LoginController;
-
+use App\Core\Permissoes;
 session_start();
+
 require_once "./vendor/autoload.php";
 
 $login = new LoginController();
-$logado = $login->verificarLogado();
-$dadosLogado = $logado['result_array'][0];
-$modulos=[
-    "DocumentoController"=>1,
-    "DownloadDocumentoController"=>1,
-    "LoginController"=>0,
-    "OCController"=>1,
-    "UsuarioController"=>1,
-    "UsuarioOrdemCompraController"=>0
-];
-
-
+$permissoes = new Permissoes();
+$telas = "";
+$class = "";
+$method = "";
 $request = $_REQUEST;
-$request['files'] = $_FILES;
 
-$class = $request['class'];
-$method = $request['method'];
+$logado = $login->verificarLogado();
+
+$dadosLogado = $logado['result_array'][0];
 
 if(!$logado['count']){
     $class= "LoginController";
     $method= "getLogin";
+}else{
+    $telas = $permissoes->telasUsuario($dadosLogado);    
+    $class = $request['class'];
+    $method = $request['method'];
+
+    $result['user'] = $_SESSION['email'];
+}
+$permissaoClassMethod = $permissoes->permissaoUsuario($class,$method,$dadosLogado);
+
+if(!$permissaoClassMethod){
+    die("sem permissao para este acesso");
 }
 
-
-if($modulos[$class] > $dadosLogado['permissao']){
-    die("Sem permissão");
-}
+$request['files'] = $_FILES;
 
 $namespace = "App\Controller\\".$class;
+   
+$obj = new $namespace;
+
 $params = $request;
-$class = new $namespace;
 
-$result = call_user_func_array(array($class, $method), array($params));
 
-$result['user'] = $_SESSION['email'];
+$result = call_user_func_array(array($obj, $method), array($params));
+
+$result['telas'] = $telas;
 
 echo json_encode($result);
 
