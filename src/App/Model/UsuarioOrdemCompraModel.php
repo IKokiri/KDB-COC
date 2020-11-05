@@ -15,7 +15,7 @@ class UsuarioOrdemCompraModel extends Model{
 
     function read(){
         
-        $sql = "SELECT usu_ord.id,ord.numero,usu.email FROM $this->table usu_ord
+        $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
         INNER JOIN coc.ordem_compra ord
         on usu_ord.id_ordem_compra = ord.id
         INNER JOIN coc.usuarios usu
@@ -52,6 +52,36 @@ class UsuarioOrdemCompraModel extends Model{
 
     }
 
+    function filterForUser($data){
+        
+        $this->populate($data);
+        
+        $sql = "SELECT oco.numero,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `coc`.`usuario_ordem_compra` usu_oco
+        INNER JOIN `coc`.`usuarios` usu
+            on usu_oco.id_usuario = usu.id
+        INNER JOIN `coc`.`ordem_compra` oco
+            on usu_oco.id_ordem_compra = oco.id
+        INNER JOIN `coc`.`documentos` doc
+            on oco.id = doc.id_ordem_compra
+        WHERE usu.email = '".$_SESSION['email']."' and (numero LIKE :numero or nome LIKE :nome or path LIKE :path or extensao LIKE :extensao)";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':numero', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':nome', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':path', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':extensao', "%".$this->term."%", PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model readForUser) os registros");
+
+        return $result;
+
+    }
+
+    
+
     function dataMail($data){
 
         $this->populate($data);
@@ -80,15 +110,39 @@ class UsuarioOrdemCompraModel extends Model{
         $this->populate($data);
 
         $sql = "SELECT * FROM ".$this->table." 
-        WHERE `id` = :id;";
+        WHERE `id_usuario` = :id_usuario and `id_ordem_compra` = :id_ordem_compra;";
 
         $query = $this->conn->prepare($sql);
 
-        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $query->bindValue(':id_usuario', $this->idusuario, PDO::PARAM_STR);
+        $query->bindValue(':id_ordem_compra', $this->idordemcompra, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
 
         $this->log->setInfo("Buscou ($this->model getId) o registro $this->id");
+
+        return $result;
+    }
+
+    function filter($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
+        INNER JOIN coc.ordem_compra ord
+        on usu_ord.id_ordem_compra = ord.id
+        INNER JOIN coc.usuarios usu
+        on usu_ord.id_usuario = usu.id
+        WHERE numero LIKE :numero or email LIKE :email";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':numero', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':email', "%".$this->term."%", PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Filtrou ($this->model getId) o registro");
 
         return $result;
     }
@@ -124,18 +178,19 @@ class UsuarioOrdemCompraModel extends Model{
 
         $this->populate($data);
 
-        $sql = "UPDATE ".$this->table." 
+       $sql = "UPDATE ".$this->table." 
                 SET
                 `id_usuario` = :id_usuario,
                 `id_ordem_compra` = :id_ordem_compra,                
                 `editado` = curtime()
-                WHERE `id` = :id;";
+                WHERE `id_usuario` = :idusuario and `id_ordem_compra` = :idordemcompra;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
         $query->bindValue(':id_usuario', $this->id_usuario, PDO::PARAM_STR);        
         $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+        $query->bindValue(':idusuario', $this->idusuario, PDO::PARAM_STR);        
+        $query->bindValue(':idordemcompra', $this->idordemcompra, PDO::PARAM_STR);
       
         $result = Database::executa($query);   
 
@@ -147,13 +202,14 @@ class UsuarioOrdemCompraModel extends Model{
     function delete($data){
 
         $this->populate($data);
-
+        
         $sql = "DELETE FROM ".$this->table." 
-                    WHERE `id` = :id;";
+                    WHERE `id_usuario` = :id_usuario and id_ordem_compra = :id_ordem_compra;";
 
         $query = $this->conn->prepare($sql);
         
-        $query->bindValue(':id', $this->id, PDO::PARAM_STR);
+        $query->bindValue(':id_usuario', $this->idusuario, PDO::PARAM_STR);
+        $query->bindValue(':id_ordem_compra', $this->idordemcompra, PDO::PARAM_STR);
 
         $result = Database::executa($query);   
 

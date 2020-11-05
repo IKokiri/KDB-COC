@@ -20,14 +20,15 @@ class Permissoes {
                         'getId'=>1,
                         'update'=>1,
                         'delete'=>1,
-                        'comunicar'=>1
+                        'comunicar'=>1,
+                        'filter'=>1,
                     ]
             ],
             "DownloadDocumentoController"=>[
-                'permissao' => 1,
+                'permissao' => 0,
                 'funcoes' => [
-                        'add'=>1,
-                        'getInfo'=>1
+                        'add'=>0,
+                        'getInfo'=>0
                     ]
             ],
             "LoginController"=>[
@@ -45,7 +46,8 @@ class Permissoes {
                         'read'=>1,
                         'getId'=>1,
                         'update'=>1,
-                        'delete'=>1
+                        'delete'=>1,
+                        'filter'=>1,
                     ]
             ],
             "UsuarioController"=>[
@@ -55,7 +57,8 @@ class Permissoes {
                         'read'=>1,
                         'getId'=>1,
                         'update'=>1,
-                        'delete'=>1
+                        'delete'=>1,
+                        'filter'=>1,
                     ]
             ],
             "UsuarioOrdemCompraController"=>[
@@ -66,7 +69,15 @@ class Permissoes {
                         'getId'=>1,
                         'update'=>1,
                         'delete'=>1,
-                        'readForUser'=>0
+                        'readForUser'=>0,
+                        'filter'=>1,
+                        'filterForUser'=>0
+                    ]
+            ],
+            "Gosth"=>[
+                'permissao' => 0,
+                'funcoes' => [
+                        'gosth'=>0
                     ]
             ],
         ];
@@ -127,7 +138,7 @@ class Permissoes {
             $tel = $this->permissao($tela,$dadosUsuario);
            
             if($tel){
-                $t[] = $tela;
+                $t['telas'][] = $tela;
             }
 
         }
@@ -141,7 +152,10 @@ class Permissoes {
         $permissaoMethod = $this->modulos[$class]['funcoes'][$method];
         $permissaoUser = $dadosUsuario['permissao'];
 
-        if($permissaoUser >= $permissaoClass && $permissaoUser >= $permissaoMethod){
+        $key = array_key_exists($method, $this->modulos[$class]['funcoes']);
+      
+      
+        if($key && $permissaoUser >= $permissaoClass && $permissaoUser >= $permissaoMethod){
             return true;
         }
         

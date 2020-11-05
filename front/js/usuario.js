@@ -1,5 +1,5 @@
 const controller = "UsuarioController"
-
+var permissao = ["Padrão","Administrador"];
 $(document).ready(function(){
 
 inicio();
@@ -94,19 +94,36 @@ $(document).on('click','#edit',function(){
     
 })
 
+$(document).on("keyup","#buscar",function(){
+    term = document.querySelector("#buscar").value;
+    buscar(term)
+})
 
-function grid_principal(){
+function buscar(term){
+    grid_principal(term);
+}
+
+function grid_principal(term = ""){
 
     formData = new FormData();
+
     formData.append('class', controller);
-    formData.append('method', 'read');
+    if(term){
+        formData.append('method', 'filter');
+        formData.append('term', term);
+    }else{
+        formData.append('method', 'read');
+    }
 
     fetch(base_request,{
         method:'post',
         body: formData
     })
     .then(response => response.json())
-    .then(data => {        
+    .then(data => { 
+        
+        
+
         grid = ""
         dados = data.result_array
         for(linha in dados){
@@ -114,7 +131,7 @@ function grid_principal(){
             `
                 <tr>
                     <td>${dados[linha].email}</td>
-                    <td>${dados[linha].permissao}</td>
+                    <td>${permissao[dados[linha].permissao]}</td>
                     <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>
@@ -138,7 +155,10 @@ function criar(formData){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {        
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }         
             inicio()
         })
         .catch(console.error);
@@ -156,7 +176,10 @@ function remover(id){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {     
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }      
             inicio()
         })
         .catch(console.error);
@@ -174,7 +197,10 @@ function edit(id){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {        
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }         
             $linha = data.result_array[0];
             preencher_form($linha);
 
@@ -192,11 +218,15 @@ function update(formData){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {     
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }      
             inicio()
         })
         .catch(console.error);
 }
+
 
 
 })

@@ -11,11 +11,13 @@
 </head>
 <body>
     
-    <button id="abrir_modal">
+<div class="text-center">
+    <button class="btn btn-primary m-1" id="abrir_modal">
         +
-    </button>
-
-    <table class="table table-hover">
+    </button> 
+  </div>
+  <div class="col-10 offset-1" id="base_alert"></div>
+  <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>
           <tr>
             <th scope="col">Nome</th>
@@ -55,6 +57,10 @@
               <label for="exampleFormControlFile1"></label>
               <input type="file" class="form-control-file" name="file[]" id="file" multiple="multiple">
             </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="notificar">
+    <label class="form-check-label" for="exampleCheck1">Notificar usuários</label>
+  </div>
             <input type="hidden" id="id">
           </form>
           <!-- FORM -->
@@ -71,6 +77,7 @@
   <?php
       include "footer.php"
     ?>
+    <script src="./js/base_alert.js"></script>
     <script src="./js/documentos.js"></script>
 </body>
 </html>

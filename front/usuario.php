@@ -5,23 +5,26 @@
 <html lang="pt-br">
 
 <body>
-    
-    <button id="abrir_modal">
+        
+  <div class="text-center">
+    <button class="btn btn-primary m-1" id="abrir_modal">
         +
-    </button>
-
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Email</th>
-            <th scope="col">Permissao</th>
-            <th scope="col">Alterar</th>
-            <th scope="col">Remover</th>
-          </tr>
-        </thead>
-        <tbody class="grid">
-        </tbody>
-      </table>
+    </button> 
+  </div>
+  
+  <div class="col-10 offset-1" id="base_alert"></div>
+  <table class="table table-bordered  table-hover col-10 offset-1">
+    <thead>
+      <tr>
+        <th scope="col">Email</th>
+        <th scope="col">Permissao</th>
+        <th scope="col">Alterar</th>
+        <th scope="col">Remover</th>
+      </tr>
+    </thead>
+    <tbody class="grid">
+    </tbody>
+  </table>
 
 <!-- Modal -->
 <div class="modal fade" id="modal_principal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,6 +73,7 @@
   <?php
       include "footer.php"
     ?>
+    <script src="./js/base_alert.js"></script>
     <script src="./js/usuario.js"></script>
 </body>
 </html>

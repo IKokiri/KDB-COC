@@ -45,6 +45,25 @@ class UsuarioModel extends Model{
         return $result;
     }
 
+    function filter($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT * FROM ".$this->table." 
+        WHERE `email` LIKE :email;";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':email', "%".$this->term."%", PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Filtrou ($this->model getId) o registro");
+
+        return $result;
+    }
+
+
     function getLogin($data){
         
         $this->populate($data);

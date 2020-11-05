@@ -10,8 +10,17 @@ $permissoes = new Permissoes();
 $telas = "";
 $class = "";
 $method = "";
+$emailLogado = "";
 $request = $_REQUEST;
 
+/**
+ * captura exceção de arquivo grande
+ */
+if ($_SERVER['CONTENT_LENGTH'] > 8380000) {
+     $result['MSN']['errorInfo'][1] = "ArqGrande";
+     echo json_encode($result);
+     die;
+}
 $logado = $login->verificarLogado();
 
 $dadosLogado = $logado['result_array'][0];
@@ -21,11 +30,13 @@ if(!$logado['count']){
     $method= "getLogin";
 }else{
     $telas = $permissoes->telasUsuario($dadosLogado);    
+    $emailLogado = $dadosLogado['email'];
     $class = $request['class'];
     $method = $request['method'];
 
     $result['user'] = $_SESSION['email'];
 }
+
 $permissaoClassMethod = $permissoes->permissaoUsuario($class,$method,$dadosLogado);
 
 if(!$permissaoClassMethod){
@@ -40,10 +51,10 @@ $obj = new $namespace;
 
 $params = $request;
 
-
 $result = call_user_func_array(array($obj, $method), array($params));
 
 $result['telas'] = $telas;
+$result['emailLogado'] = $emailLogado;
 
 echo json_encode($result);
 

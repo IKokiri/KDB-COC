@@ -40,7 +40,8 @@
 
 
 
-    <table class="table table-hover">
+ <br>
+  <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>
           <tr>
             <th scope="col">OC</th>

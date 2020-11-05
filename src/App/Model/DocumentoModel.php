@@ -47,6 +47,29 @@ class DocumentoModel extends Model{
         return $result;
     }
 
+    function filter($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao FROM $this->table doc
+    INNER JOIN coc.ordem_compra ord
+        on doc.id_ordem_compra = ord.id
+        WHERE nome LIKE :nome or path LIKE :path or numero LIKE :numero or extensao LIKE :extensao";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':nome', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':path', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':numero', "%".$this->term."%", PDO::PARAM_STR);
+        $query->bindValue(':extensao', "%".$this->term."%", PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Filtrou ($this->model getId) o registro $this->id");
+
+        return $result;
+    }
+    
 
     function create($data){
         

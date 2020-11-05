@@ -41,7 +41,9 @@ class DocumentoController {
     }
 
     function create($data){
-     
+        
+        mkdir('./src/docs/'.$data['id_ordem_compra'].'/', 0777, true);
+
         $files = $data['files'];
    
             $arqNomes = "<br><br>";
@@ -52,7 +54,7 @@ class DocumentoController {
             $extensao =  end($name);
             $nomeCompleto = $nome.".".$extensao;
             $arqNomes .= $nomeCompleto."<br>";
-            $path = "./src/docs/".$nomeCompleto;
+            $path = "./src/docs/".$data['id_ordem_compra']."/".$nomeCompleto;
             $file['extensao'] = $extensao;
             $file['path'] = $nomeCompleto;
             $data['nome'] = $nome;
@@ -60,14 +62,17 @@ class DocumentoController {
             $data['path'] = $nomeCompleto;
 
             move_uploaded_file($file['tmp_name'], $path);
+            
             $this->model->create($data);
 
             // $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Adicionado");
             
         }
+        if($data['notificar'] == "true"){
+            
+            $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionado");
+        }
         
-        $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionado");
-
         return ['ok'];
     }
 
@@ -80,6 +85,12 @@ class DocumentoController {
     function getId($data){
         
         return $this->model->getId($data);
+    }
+
+
+    function filter($data){
+        
+        return $this->model->filter($data);
     }
 
     function update($data){

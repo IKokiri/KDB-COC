@@ -19,12 +19,13 @@ function carregar_campos(){
     formData = new FormData();
     let id = document.querySelector("#id").value;
     let id_ordem_compra = document.querySelector("#id_ordem_compra").value;
-
-    
+    let notificar = document.querySelector("#notificar").checked;
+   
     for(f in inputFile.files){
         formData.append('file'+f, inputFile.files[f]);
     }
     formData.append('id_ordem_compra', id_ordem_compra);
+    formData.append('notificar', notificar);
     formData.append('id', id);
 
     return formData;
@@ -94,11 +95,26 @@ $(document).on('click','#edit',function(){
 })
 
 
-function grid_principal(){
+$(document).on("keyup","#buscar",function(){
+    term = document.querySelector("#buscar").value;
+    buscar(term)
+})
+
+function buscar(term){
+    grid_principal(term);
+}
+
+function grid_principal(term = ""){
 
     formData = new FormData();
+
     formData.append('class', controller);
-    formData.append('method', 'read');
+    if(term){
+        formData.append('method', 'filter');
+        formData.append('term', term);
+    }else{
+        formData.append('method', 'read');
+    }
 
     fetch(base_request,{
         method:'post',
@@ -142,7 +158,12 @@ function criar(formData){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {        
+        .then(data => {   
+            
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }
+            
             inicio()
         })
         .catch(console.error);
@@ -160,7 +181,12 @@ function remover(id){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {     
+        .then(data => {   
+            
+            
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }  
             inicio()
         })
         .catch(console.error);
@@ -179,6 +205,11 @@ function edit(id){
         })
         .then(response => response.json())
         .then(data => {        
+
+            
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }
             $linha = data.result_array[0];
             preencher_form($linha);
 
@@ -196,7 +227,12 @@ function update(formData){
             body: formData
         })
         .then(response => response.json())
-        .then(data => {     
+        .then(data => { 
+            
+            
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }    
             inicio()
         })
         .catch(console.error);

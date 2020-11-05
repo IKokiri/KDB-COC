@@ -22,6 +22,11 @@ class OCController {
         return $this->model->read();
     }
 
+    function filter($data){
+        
+        return $this->model->filter($data);
+    }
+    
     function getId($data){
         
         return $this->model->getId($data);

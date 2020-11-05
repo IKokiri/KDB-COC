@@ -45,7 +45,23 @@ class OCModel extends Model{
 
         return $result;
     }
+    function filter($data){
+        
+        $this->populate($data);
 
+        $sql = "SELECT * FROM ".$this->table." 
+        WHERE `numero` LIKE :numero;";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':numero',"%".$this->term."%", PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Filtrou ($this->model getId) o registro");
+
+        return $result;
+    }
 
     function create($data){
         

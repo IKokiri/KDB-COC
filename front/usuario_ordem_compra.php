@@ -11,11 +11,14 @@
 </head>
 <body>
     
-    <button id="abrir_modal">
+<div class="text-center">
+    <button class="btn btn-primary m-1" id="abrir_modal">
         +
-    </button>
-
-    <table class="table table-hover">
+    </button> 
+  </div>
+  
+  <div class="col-10 offset-1" id="base_alert"></div>
+  <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>
           <tr>
             <th scope="col">Usuário</th>
@@ -56,7 +59,8 @@
                 </select>
               </div>             
             </div>
-            <input type="hidden" id="id">
+            <input type="hidden" id="idusuario">
+            <input type="hidden" id="idordemcompra">
           </form>
           <!-- FORM -->
         </div>
@@ -67,11 +71,10 @@
       </div>
     </div>
   </div>
-
-    
   <?php
       include "footer.php"
     ?>
+    <script src="./js/base_alert.js"></script>
     <script src="./js/usuario_ordem_compra.js"></script>
 </body>
 </html>

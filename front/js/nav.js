@@ -12,7 +12,8 @@ $(document).ready(function(){
     .then(data => {    
   
         menus = "";
-        grupoTelas = data
+        grupoTelas = data.telas
+        usuario_ativo = data.emailLogado
         
         for(t in grupoTelas){
 
@@ -33,6 +34,8 @@ $(document).ready(function(){
                     <a class="nav-link text-danger" href="/front/">Sair</a>
                 </li> `
       document.querySelector(".menus").innerHTML = menus
+      document.querySelector("#usuario_ativo").innerHTML = usuario_ativo
+      
 
     })
     .catch(console.error);

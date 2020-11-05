@@ -22,6 +22,16 @@ class UsuarioOrdemCompraController {
         return $this->model->read();
     }
 
+
+    function filter($data){
+        
+        return $this->model->filter($data);
+    }
+
+    function filterForUser($data){
+        
+        return $this->model->filterForUser($data);
+    }
     function readForUser($data){
         
         return $this->model->readForUser();

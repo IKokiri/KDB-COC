@@ -9,11 +9,26 @@ function inicio(){
     grid_principal()
 }
 
-function grid_principal(){
+$(document).on("keyup","#buscar",function(){
+    term = document.querySelector("#buscar").value;
+    buscar(term)
+})
+
+function buscar(term){
+    grid_principal(term);
+}
+
+function grid_principal(term = ""){
 
     formData = new FormData();
+
     formData.append('class', controller);
-    formData.append('method', 'readForUser');
+    if(term){
+        formData.append('method', 'filterForUser');
+        formData.append('term', term);
+    }else{
+        formData.append('method', 'readForUser');
+    }
 
     fetch(base_request,{
         method:'post',
@@ -46,7 +61,7 @@ function grid_principal(){
         
         }
         document.querySelector(".grid").innerHTML = grid
-        document.querySelector("#usuario_ativo").innerHTML = data.user
+        
     })
     .catch(console.error);
 }

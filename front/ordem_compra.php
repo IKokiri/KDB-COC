@@ -16,11 +16,14 @@
 ?>
 <body>
     
-    <button id="abrir_modal">
+<div class="text-center">
+    <button class="btn btn-primary m-1" id="abrir_modal">
         +
-    </button>
-
-    <table class="table table-hover">
+    </button> 
+  </div>
+  <div class="col-10 offset-1" id="base_alert"></div>
+  
+  <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -68,6 +71,7 @@
   <?php
       include "footer.php"
     ?>
+    <script src="./js/base_alert.js"></script>
     <script src="./js/ordem_compra.js"></script>
 </body>
 </html>
