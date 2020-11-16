@@ -131,11 +131,10 @@ function grid_principal(term = ""){
                     <td>${dados[linha].nome}</td>
                     <td>${dados[linha].numero}</td>
                     <td>
-                        <a href="${base_request}/src/docs/${dados[linha].path}" target="_blank">
+                        <a href="${base_request}/src/docs/${dados[linha].id_oc}/${dados[linha].path}" target="_blank">
                             <img src="./icons/ext/${dados[linha].extensao}.png">
                         </a>
                     </td>
-                    <td data-id="${dados[linha].id}" id="edit"><img src="./icons/001-pencil.png"  alt=""></td>
                     <td data-id="${dados[linha].id}" id="remover"><img src="./icons/002-delete.png"  alt=""></td>
                 </tr>
             `
@@ -161,7 +160,7 @@ function criar(formData){
         .then(data => {   
             
             if(data.MSN){
-                base_erro(data.MSN.errorInfo[1])
+                base_erro(data.MSN.errorInfo[1],data.MSN.errorInfo[2])
             }
             
             inicio()

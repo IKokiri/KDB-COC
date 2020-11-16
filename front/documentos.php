@@ -23,7 +23,6 @@
             <th scope="col">Nome</th>
             <th scope="col">OC</th>
             <th scope="col">Download</th>
-            <th scope="col">Alterar</th>
             <th scope="col">Remover</th>
           </tr>
         </thead>

@@ -45,8 +45,8 @@ class DocumentoController {
         mkdir('./src/docs/'.$data['id_ordem_compra'].'/', 0777, true);
 
         $files = $data['files'];
-   
             $arqNomes = "<br><br>";
+
         foreach($files as $file){  
 
             $name = explode(".",$file['name']);
@@ -61,19 +61,26 @@ class DocumentoController {
             $data['extensao'] = $extensao;
             $data['path'] = $nomeCompleto;
 
+            if(file_exists($path)){
+                $result['MSN']['errorInfo'][1] = "arqDup";
+                $result['MSN']['errorInfo'][2] .= $nomeCompleto.",";
+                continue;
+            }
+
             move_uploaded_file($file['tmp_name'], $path);
             
             $this->model->create($data);
 
-            // $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Adicionado");
+            // $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Adicpdocumionado");
             
         }
         if($data['notificar'] == "true"){
             
             $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionado");
         }
+
         
-        return ['ok'];
+        return $result;
     }
 
     function read($data){

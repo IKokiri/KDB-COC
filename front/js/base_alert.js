@@ -1,4 +1,4 @@
-function base_erro(erro){
+function base_erro(erro, obs=""){
     err = ""
     if(erro == 1062){
         
@@ -39,6 +39,15 @@ if(erro == "ArqGrande"){
       <span aria-hidden="true">&times;</span>
       </button>
     </div>`;
+}
+if(erro == "arqDup"){
+        
+  err = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Atenção!</strong> #005- Arquivo já existe. (${obs})
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>`;
 }
     document.querySelector("#base_alert").innerHTML = err;
 }

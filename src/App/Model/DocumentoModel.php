@@ -15,7 +15,7 @@ class DocumentoModel extends Model{
 
     function read(){
         
-        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao FROM $this->table doc
+        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao,ord.id as id_oc FROM $this->table doc
                     INNER JOIN coc.ordem_compra ord
                         on doc.id_ordem_compra = ord.id";
 

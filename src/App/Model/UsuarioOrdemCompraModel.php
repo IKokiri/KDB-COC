@@ -33,7 +33,7 @@ class UsuarioOrdemCompraModel extends Model{
 
     function readForUser(){
         
-        $sql = "SELECT oco.numero,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `coc`.`usuario_ordem_compra` usu_oco
+        $sql = "SELECT oco.numero,oco.id as id_oc,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `coc`.`usuario_ordem_compra` usu_oco
         INNER JOIN `coc`.`usuarios` usu
             on usu_oco.id_usuario = usu.id
         INNER JOIN `coc`.`ordem_compra` oco
