@@ -2,7 +2,7 @@
 use App\Controller\LoginController;
 use App\Core\Permissoes;
 session_start();
-
+error_reporting(0);
 require_once "./vendor/autoload.php";
 
 $login = new LoginController();

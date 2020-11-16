@@ -7,7 +7,7 @@ class InfoDB {
     private $host = "localhost";
     private $database = "coc";
     private $user = "root";
-    private $password = "LDeveloper#123d";
+    private $password = "";
 
     function getHost(){
         return $this->host;

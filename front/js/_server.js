@@ -1,0 +1,6 @@
+const base_request = "http://localhost:8000"
+const base_front = "http://localhost:8000/front"
+const base = "http://localhost:8000"
+// const base_request = "http://www.kuttner.com.br/coc/index.php"
+// const base_front = "http://www.kuttner.com.br/coc/front"
+// const base = "http://www.kuttner.com.br/coc"
