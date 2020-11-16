@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    
     formData = new FormData();
     formData.append('class', "Gosth");
     formData.append('method', "gosth");
@@ -31,7 +30,7 @@ $(document).ready(function(){
             }
         }
         menus += `<li class="nav-item">
-                    <a class="nav-link text-danger" href="/front/">Sair</a>
+                    <a class="nav-link text-danger" href="${base_front}">Sair</a>
                 </li> `
       document.querySelector(".menus").innerHTML = menus
       document.querySelector("#usuario_ativo").innerHTML = usuario_ativo
