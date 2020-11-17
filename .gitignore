@@ -1,6 +1,5 @@
 /vendor/
 server.js
 InfoDB.php
-InfoMail.php
-docs/
+InfoMail.phpW
 *.log
