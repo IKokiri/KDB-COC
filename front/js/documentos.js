@@ -131,7 +131,7 @@ function grid_principal(term = ""){
                     <td>${dados[linha].nome}</td>
                     <td>${dados[linha].numero}</td>
                     <td>
-                        <a href="${base_request}/src/docs/${dados[linha].id_oc}/${dados[linha].path}" target="_blank">
+                        <a href="${base}/src/docs/${dados[linha].id_oc}/${dados[linha].path}" target="_blank">
                             <img src="./icons/ext/${dados[linha].extensao}.png">
                         </a>
                     </td>
