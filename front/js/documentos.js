@@ -10,6 +10,7 @@ function inicio(){
     limpar_campos()
     carregar_ocs();
     $('#modal_principal').modal('hide')
+    document.querySelector('.enviandoArquivos').style.display = 'none';
 }
 
 function carregar_campos(){
@@ -146,7 +147,7 @@ function grid_principal(term = ""){
 
 // CRIAR
 function criar(formData){
-    
+    document.querySelector('.enviandoArquivos').style.display = 'block';
 
     formData = carregar_campos();
     formData.append('class', controller);

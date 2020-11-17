@@ -56,23 +56,31 @@
               <label for="exampleFormControlFile1"></label>
               <input type="file" class="form-control-file" name="file[]" id="file" multiple="multiple">
             </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="notificar">
-    <label class="form-check-label" for="exampleCheck1">Notificar usuários</label>
-  </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="notificar">
+            <label class="form-check-label" for="exampleCheck1">Notificar usuários</label>
+          </div>
             <input type="hidden" id="id">
           </form>
           <!-- FORM -->
         </div>
         <div class="modal-footer">
+        <div class="enviandoArquivos">
+          <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Enviando Arquivos
+          </button>
+        </div>        
+        <div class="botoesPadrao">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" id="salvar" class="btn btn-primary">Salvar</button>
+            <button type="button" id="salvar" class="btn btn-primary">Salvar</button>
+        </div>
+          
         </div>
       </div>
     </div>
   </div>
 
-    
   <?php
       include "footer.php"
     ?>
