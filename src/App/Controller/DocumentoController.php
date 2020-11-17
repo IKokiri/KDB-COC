@@ -50,8 +50,11 @@ class DocumentoController {
         foreach($files as $file){  
 
             $name = explode(".",$file['name']);
-            $nome = $name[0];
+           
             $extensao =  end($name);
+            unset($name[array_key_last($name)]);
+          
+            $nome = implode(".",$name);
             $nomeCompleto = $nome.".".$extensao;
             $arqNomes .= $nomeCompleto."<br>";
             $path = "./src/docs/".$data['id_ordem_compra']."/".$nomeCompleto;
