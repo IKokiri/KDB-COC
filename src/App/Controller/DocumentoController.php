@@ -52,7 +52,7 @@ class DocumentoController {
             $name = explode(".",$file['name']);
            
             $extensao =  end($name);
-            unset($name[array_key_last($name)]);
+            unset($name[count($name)-1]);
           
             $nome = implode(".",$name);
             $nomeCompleto = $nome.".".$extensao;
