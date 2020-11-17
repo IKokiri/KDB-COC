@@ -2,5 +2,5 @@
 server.js
 InfoDB.php
 InfoMail.php
-docs/
+/src/docs/*
 *.log
