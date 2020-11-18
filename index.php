@@ -21,7 +21,7 @@ $request = $_REQUEST;
 /**
  * captura exceção de arquivo grande
  */
-if ($_SERVER['CONTENT_LENGTH'] > 8380000) {
+if ($_SERVER['CONTENT_LENGTH'] > 18380000) {
      $result['MSN']['errorInfo'][1] = "ArqGrande";
      echo json_encode($result);
      die;
