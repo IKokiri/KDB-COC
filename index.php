@@ -4,6 +4,12 @@ use App\Core\Permissoes;
 session_start();
 error_reporting(0);
 require_once "./vendor/autoload.php";
+if($_REQUEST['method'] == "deslogar"){
+    session_destroy();
+    
+    echo json_encode(["ok"]);
+    die;
+}
 $login = new LoginController();
 $permissoes = new Permissoes();
 $telas = "";
@@ -35,7 +41,6 @@ if(!$logado['count']){
 
     $result['user'] = $_SESSION['email'];
 }
-
 $permissaoClassMethod = $permissoes->permissaoUsuario($class,$method,$dadosLogado);
 
 if(!$permissaoClassMethod){

@@ -30,21 +30,34 @@ function gridUsers(term = ""){
     })
     .then(response => response.json())
     .then(data => { 
+    
+        div = Math.ceil(data.count/4)
         
-        
-
         grid = ""
+        ckbUsers=""
         dados = data.result_array
+        i=0;
         for(linha in dados){
-            grid += 
+            ckbUsers += 
             `  
-            <div class="form-group form-check">
-            <input type="checkbox" data-checked="id${dados[linha].id}" class="checkGroupUser form-check-input" id="${dados[linha].id}">
-            <label class="form-check-label" for="${dados[linha].id}">${dados[linha].email}</label>
+            <div class='col-3'>
+                <div class="form-group form-check">
+                <input type="checkbox" data-checked="id${dados[linha].id}" class="checkGroupUser form-check-input" id="${dados[linha].id}">
+                <label class="form-check-label" for="${dados[linha].id}">${dados[linha].email}</label>
+                </div>
             </div>
-            `
+            ` 
+            
+            i++
+
+            if(i==4){
+                grid += "<div class='row'>"+ckbUsers+"</div>"
+                ckbUsers = ""
+                i=0;
+            }
         }
         
+        grid += "<div class='row'>"+ckbUsers+"</div>"
         checkUsers();
         document.querySelector(".groupUsers").innerHTML = grid
     })
