@@ -79,14 +79,12 @@ class DocumentoModel extends Model{
                     (`nome`,
                     `extensao`,
                     `path`,
-                    `id_ordem_compra`,
-                    `criado`)
+                    `id_ordem_compra`)
                     VALUES
                     (:nome,
                     :extensao,
                     :path,
-                    :id_ordem_compra,
-                    curtime())";
+                    :id_ordem_compra)";
 
         $query = $this->conn->prepare($sql);
         
@@ -110,7 +108,7 @@ class DocumentoModel extends Model{
         $path = "";
         
         if($this->path){
-            $path = "`extensao` = :extensao,`path` = :path,`nome` = :nome,  ";
+            $path = "`extensao` = :extensao,`path` = :path,`nome` = :nome  ";
         }
 
         $sql = "UPDATE ".$this->table." 
@@ -118,7 +116,6 @@ class DocumentoModel extends Model{
                 `id` = :id,              
                 `id_ordem_compra` = :id_ordem_compra,
                 ".$path."
-                `editado` = curtime()
                 WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);

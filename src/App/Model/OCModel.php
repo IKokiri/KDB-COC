@@ -68,11 +68,9 @@ class OCModel extends Model{
         $this->populate($data);
         
         $sql = "INSERT INTO ".$this->table." 
-                    (`numero`,
-                    `criado`)
+                    (`numero`)
                     VALUES
-                    (:numero,
-                    curtime())";
+                    (:numero)";
 
         $query = $this->conn->prepare($sql);
         
@@ -91,8 +89,7 @@ class OCModel extends Model{
 
         $sql = "UPDATE ".$this->table." 
                     SET
-                    `numero` = :numero,
-                    `editado` = curtime()
+                    `numero` = :numero
                     WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);

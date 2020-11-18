@@ -172,12 +172,10 @@ class UsuarioOrdemCompraModel extends Model{
         
         $sql = "INSERT INTO ".$this->table." 
                     (`id_usuario`,
-                    `id_ordem_compra`,
-                    `criado`)
+                    `id_ordem_compra`)
                     VALUES
                     (:id_usuario,
-                    :id_ordem_compra,
-                    curtime())";
+                    :id_ordem_compra)";
 
         $query = $this->conn->prepare($sql);
         
@@ -199,8 +197,7 @@ class UsuarioOrdemCompraModel extends Model{
        $sql = "UPDATE ".$this->table." 
                 SET
                 `id_usuario` = :id_usuario,
-                `id_ordem_compra` = :id_ordem_compra,                
-                `editado` = curtime()
+                `id_ordem_compra` = :id_ordem_compra
                 WHERE `id_usuario` = :idusuario and `id_ordem_compra` = :idordemcompra;";
 
         $query = $this->conn->prepare($sql);

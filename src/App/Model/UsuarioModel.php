@@ -91,13 +91,11 @@ class UsuarioModel extends Model{
         $sql = "INSERT INTO ".$this->table." 
                     (`email`,
                     `senha`,
-                    `permissao`,
-                    `criado`)
+                    `permissao`)
                     VALUES
                     (:email,
                     :senha,
-                    :permissao,
-                    curtime())";
+                    :permissao)";
 
         $query = $this->conn->prepare($sql);
         
@@ -120,8 +118,7 @@ class UsuarioModel extends Model{
                 SET
                 `email` = :email,
                 `senha` = :senha,
-                `permissao` = :permissao,                 
-                `editado` = curtime()
+                `permissao` = :permissao
                 WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);

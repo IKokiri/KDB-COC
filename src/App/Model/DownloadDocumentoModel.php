@@ -12,19 +12,20 @@ class DownloadDocumentoModel extends Model{
     private $table = "`coc`.`downloads_documentos`";
     private $model = "DownloadDocumentoModel";
     private $usuario = "USER";
-
+    // ALTER TABLE `coc`.`downloads_documentos` 
+    // CHANGE COLUMN `data_download` `data_download` TIMESTAMP(6) NOT NULL ;
+    
+    
     function add($data){
 
         $this->populate($data);
 
         $sql = "INSERT INTO ".$this->table." 
                 (`id_documento`,
-                `id_usuario`,
-                `data_download`)
+                `id_usuario`)
                 VALUES
                 (:id_documento,
-                :id_usuario,
-                curtime())";
+                :id_usuario)";
 
         $query = $this->conn->prepare($sql);
 
