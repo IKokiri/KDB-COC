@@ -71,7 +71,9 @@ class Permissoes {
                         'delete'=>1,
                         'readForUser'=>0,
                         'filter'=>1,
-                        'filterForUser'=>0
+                        'filterForUser'=>0,
+                        'addUsers'=>1,
+                        'getUsersOC'=>1,
                     ]
             ],
             "Gosth"=>[

@@ -53,4 +53,24 @@ class UsuarioOrdemCompraController {
         return $this->model->delete($request);
     }
 
+    function addUsers($request){
+
+        $users = explode(",",$request['users']);
+        $id_oc = $request['id'];
+
+        foreach($users as $user){
+            $data["id_usuario"] = $user;
+            $data["id_ordem_compra"] = $id_oc;
+            $this->create($data);
+        }
+        return['ok'];
+    }
+
+    function getUsersOC($request){
+
+        return $this->model->getUsersOC($request);
+    }
+
+    
+
 }

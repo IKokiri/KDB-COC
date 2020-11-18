@@ -123,6 +123,24 @@ class UsuarioOrdemCompraModel extends Model{
 
         return $result;
     }
+ 
+    function getUsersOC($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT id_usuario FROM ".$this->table." 
+        WHERE `id_ordem_compra` = :id_ordem_compra;";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':id_ordem_compra', $this->id, PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model getUsersOC) o registro $this->id");
+
+        return $result;
+    }
 
     function filter($data){
         
