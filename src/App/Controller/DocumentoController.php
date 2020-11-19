@@ -34,7 +34,10 @@ class DocumentoController {
         }
         
         $assunto = "OC {$numeroOC} Alterada";
-        $corpo = "O documento {$documento} foi {$operacao}";
+        $corpo = "<b>*Este &eacute; um e-mail autom&aacute;tico, n&atilde;o responda.</b><br/><br/>";
+        $corpo .= "Documentos {$operacao}: {$documento}<br/>";
+        $corpo .= "Acesse <a href='http://10.0.0.252:8090/KDB-COC/front/'>Sistema OCs</a> para mais informa&ccedil;&otilde;es.<br/><br/>";
+        $corpo .= "<b>*Este &eacute; um e-mail autom&aacute;tico, n&atilde;o responda.</b><br/>";
 
         $mail->send($assunto,$corpo);
 
@@ -79,7 +82,7 @@ class DocumentoController {
         }
         if($data['notificar'] == "true"){
             
-            $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionado");
+            $this->comunicar($data["id_ordem_compra"],$arqNomes,"Adicionados");
         }
 
         
@@ -119,7 +122,7 @@ class DocumentoController {
             
             move_uploaded_file($data['files']['file0']['tmp_name'], $path);
 
-            $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Alterado");
+            $this->comunicar($data["id_ordem_compra"],$nomeCompleto,"Alterados");
         }
     
         return $this->model->update($data);
@@ -130,7 +133,7 @@ class DocumentoController {
     
         $nomeCompleto = $result['result_array'][0]['path'];
         $id_ordem_compra = $result['result_array'][0]['id_ordem_compra'];
-        $this->comunicar($id_ordem_compra,$nomeCompleto,"Removido");
+        $this->comunicar($id_ordem_compra,$nomeCompleto,"Removidos");
         /**
          * renomeia o arquivo
          */
