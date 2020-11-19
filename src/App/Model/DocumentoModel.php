@@ -39,8 +39,8 @@ class DocumentoModel extends Model{
 
         $query = $this->conn->prepare($sql);
 
-        $query->bindValue(':pagini', $this->pagini, PDO::PARAM_INT);
-        $query->bindValue(':pagfim', $this->pagfim, PDO::PARAM_INT);
+        $query->bindValue(':pagini', (int)$this->pagini, PDO::PARAM_INT);
+        $query->bindValue(':pagfim', (int)$this->pagfim, PDO::PARAM_INT);
 
         $result = Database::executa($query);   
 
