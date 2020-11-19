@@ -127,7 +127,6 @@ class DocumentoController {
 
     function delete($data){
         $result = $this->model->getId($data);
-        print_r($result);
     
         $nomeCompleto = $result['result_array'][0]['path'];
         $id_ordem_compra = $result['result_array'][0]['id_ordem_compra'];

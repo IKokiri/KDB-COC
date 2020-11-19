@@ -9,7 +9,7 @@ use PDO;
 
 class OCModel extends Model{
 
-    private $table = "`coc`.`ordem_compra`";
+    private $table = "`ordem_compra`";
     private $model = "OCModel";
     private $usuario = "USER";
 

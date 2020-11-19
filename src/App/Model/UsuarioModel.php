@@ -9,12 +9,12 @@ use PDO;
 
 class UsuarioModel extends Model{
 
-    private $table = "`coc`.`usuarios`";
+    private $table = "`usuarios`";
     private $model = "UsuarioModel";
 
     function read(){
         
-        $sql = "SELECT * FROM ".$this->table;
+        $sql = "SELECT * FROM ".$this->table." ORDER BY email asc";
 
         $query = $this->conn->prepare($sql);
 
@@ -68,7 +68,7 @@ class UsuarioModel extends Model{
         
         $this->populate($data);
 
-        $sql = "SELECT * FROM coc.usuarios
+        $sql = "SELECT * FROM usuarios
         WHERE email = :email and senha = :senha";
 
         $query = $this->conn->prepare($sql);
@@ -157,7 +157,7 @@ class UsuarioModel extends Model{
 
         $this->populate($data);
 
-        $sql = "SELECT * FROM coc.usuarios
+        $sql = "SELECT * FROM usuarios
         WHERE email = :email and senha = :senha and id = :id and permissao = :permissao";
 
         $query = $this->conn->prepare($sql);

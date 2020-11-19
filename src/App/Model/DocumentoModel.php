@@ -9,14 +9,14 @@ use PDO;
 
 class DocumentoModel extends Model{
 
-    private $table = "`coc`.`documentos`";
+    private $table = "`documentos`";
     private $model = "DocumentoModel";
     private $usuario = "USER";
 
     function read(){
         
         $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao,ord.id as id_oc FROM $this->table doc
-                    INNER JOIN coc.ordem_compra ord
+                    INNER JOIN ordem_compra ord
                         on doc.id_ordem_compra = ord.id";
 
         $query = $this->conn->prepare($sql);
@@ -52,7 +52,7 @@ class DocumentoModel extends Model{
         $this->populate($data);
 
         $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao FROM $this->table doc
-    INNER JOIN coc.ordem_compra ord
+    INNER JOIN ordem_compra ord
         on doc.id_ordem_compra = ord.id
         WHERE nome LIKE :nome or path LIKE :path or numero LIKE :numero or extensao LIKE :extensao";
 

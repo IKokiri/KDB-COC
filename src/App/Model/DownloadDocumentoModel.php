@@ -9,11 +9,9 @@ use PDO;
 
 class DownloadDocumentoModel extends Model{
 
-    private $table = "`coc`.`downloads_documentos`";
+    private $table = "`downloads_documentos`";
     private $model = "DownloadDocumentoModel";
     private $usuario = "USER";
-    // ALTER TABLE `coc`.`downloads_documentos` 
-    // CHANGE COLUMN `data_download` `data_download` TIMESTAMP(6) NOT NULL ;
     
     
     function add($data){
@@ -43,10 +41,10 @@ class DownloadDocumentoModel extends Model{
 
         $this->populate($data);
 
-        $sql = "SELECT usu.email,dow_doc.data_download FROM coc.downloads_documentos dow_doc
-                    INNER JOIN coc.documentos doc
+        $sql = "SELECT usu.email,dow_doc.data_download FROM downloads_documentos dow_doc
+                    INNER JOIN documentos doc
                         on dow_doc.id_documento = doc.id
-                    INNER JOIN coc.usuarios usu
+                    INNER JOIN usuarios usu
                         on dow_doc.id_usuario =  usu.id
                     WHERE id_documento = :id_documento";
 
