@@ -22,6 +22,7 @@ class Permissoes {
                         'delete'=>1,
                         'comunicar'=>1,
                         'filter'=>1,
+                        'readLimit'=>1
                     ]
             ],
             "DownloadDocumentoController"=>[
@@ -48,6 +49,7 @@ class Permissoes {
                         'update'=>1,
                         'delete'=>1,
                         'filter'=>1,
+                        'readLimit'=>1
                     ]
             ],
             "UsuarioController"=>[
@@ -59,6 +61,7 @@ class Permissoes {
                         'update'=>1,
                         'delete'=>1,
                         'filter'=>1,
+                        'readLimit'=>1
                     ]
             ],
             "UsuarioOrdemCompraController"=>[
@@ -74,6 +77,7 @@ class Permissoes {
                         'filterForUser'=>0,
                         'addUsers'=>1,
                         'getUsersOC'=>1,
+                        'readLimit'=>1
                     ]
             ],
             "Gosth"=>[

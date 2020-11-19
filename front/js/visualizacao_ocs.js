@@ -18,7 +18,7 @@ function buscar(term){
     grid_principal(term);
 }
 
-function grid_principal(term = ""){
+function grid_principal(term = "",ini = 0,fim = 10){
 
     formData = new FormData();
 
@@ -29,6 +29,9 @@ function grid_principal(term = ""){
     }else{
         formData.append('method', 'readForUser');
     }
+
+    formData.append('pagini', ini);    
+    formData.append('pagfim', fim);
 
     fetch(base_request,{
         method:'post',
@@ -61,10 +64,42 @@ function grid_principal(term = ""){
         
         }
         document.querySelector(".grid").innerHTML = grid
-        
+        pagination(ini,fim);
     })
     .catch(console.error);
 }
+function pagination(ini,fim = 10){
+
+    ini = parseInt(ini);
+    fim = parseInt(fim);
+   
+    pag = ` <li class="page-item anterior" data-ini=${ini-10}  data-fim=${fim}><a class="page-link" href="javascript:void(0)"><<</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0)">${ini+1} a ${ini+10}</a></li>
+    <li class="page-item proximo"  data-ini=${ini+10}  data-fim=${fim}><a class="page-link" href="javascript:void(0)">>></a></li>`
+    
+    document.querySelector(".pagination").innerHTML = pag
+   
+}
+
+$(document).on('click','.anterior',function(){
+  
+    ini = $(this).attr("data-ini");
+    fim = $(this).attr("data-fim");
+    ini = parseInt(ini);
+    fim = parseInt(fim);
+    if(ini < 0){
+        return;
+    }
+    grid_principal("",ini,fim)
+})
+
+$(document).on('click','.proximo',function(){
+    ini = $(this).attr("data-ini");
+    fim = $(this).attr("data-fim");
+    ini = parseInt(ini);
+    fim = parseInt(fim);
+    grid_principal("",ini,fim)
+})
 
 function addDownload(id_documento){
     

@@ -26,6 +26,25 @@ class UsuarioModel extends Model{
 
     }
 
+    function readLimit($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT * FROM ".$this->table." ORDER BY email asc limit :pagini,:pagfim";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':pagini', $this->pagini, PDO::PARAM_INT);
+        $query->bindValue(':pagfim', $this->pagfim, PDO::PARAM_INT);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model readLimit) os registros");
+
+        return $result;
+
+    }
+
 
     function getId($data){
         

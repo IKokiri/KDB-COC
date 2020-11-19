@@ -30,6 +30,12 @@
         <tbody class="grid">
         </tbody>
       </table>
+  <div class="offset-1">
+      <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      </ul>
+      </nav>
+  </div>
 
 <!-- Modal -->
 <div class="modal fade" id="modal_principal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

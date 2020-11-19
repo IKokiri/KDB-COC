@@ -21,6 +21,11 @@ class UsuarioOrdemCompraController {
         
         return $this->model->read();
     }
+    
+    function readLimit($data){
+        
+        return $this->model->readLimit($data);
+    }
 
 
     function filter($data){
@@ -34,7 +39,7 @@ class UsuarioOrdemCompraController {
     }
     function readForUser($data){
         
-        return $this->model->readForUser();
+        return $this->model->readForUser($data);
     }
 
 

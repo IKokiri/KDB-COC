@@ -21,6 +21,11 @@ class OCController {
         
         return $this->model->read();
     }
+    
+    function readLimit($data){
+        
+        return $this->model->readLimit($data);
+    }
 
     function filter($data){
         

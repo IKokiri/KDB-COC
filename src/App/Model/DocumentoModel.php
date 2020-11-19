@@ -29,6 +29,27 @@ class DocumentoModel extends Model{
 
     }
 
+    function readLimit($data){
+        
+        $this->populate($data);
+
+        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao,ord.id as id_oc FROM $this->table doc
+        INNER JOIN ordem_compra ord
+            on doc.id_ordem_compra = ord.id limit :pagini,:pagfim";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':pagini', $this->pagini, PDO::PARAM_INT);
+        $query->bindValue(':pagfim', $this->pagfim, PDO::PARAM_INT);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model readLimit) os registros");
+
+        return $result;
+
+    }
+
     function getId($data){
         
         $this->populate($data);

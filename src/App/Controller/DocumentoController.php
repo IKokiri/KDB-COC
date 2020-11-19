@@ -94,6 +94,11 @@ class DocumentoController {
         return $this->model->read();
     }
     
+    function readLimit($data){
+        
+        return $this->model->readLimit($data);
+    }
+    
 
     function getId($data){
         

@@ -29,6 +29,8 @@
             </tbody>
           </table>  
 
+ 
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -52,7 +54,13 @@
         </thead>
         <tbody class="grid">
         </tbody>
-    </table>
+    </table> 
+    <div class="offset-1">
+      <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      </ul>
+      </nav>
+  </div>
     <?php
       require_once "./footer.php";
     ?>

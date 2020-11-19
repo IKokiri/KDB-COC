@@ -31,7 +31,32 @@ class UsuarioOrdemCompraModel extends Model{
 
     }
 
-    function readForUser(){
+    function readLimit($data){
+        
+        $this->populate($data);
+
+        $sql = $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
+        INNER JOIN ordem_compra ord
+        on usu_ord.id_ordem_compra = ord.id
+        INNER JOIN usuarios usu
+        on usu_ord.id_usuario = usu.id limit :pagini,:pagfim";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':pagini', $this->pagini, PDO::PARAM_INT);
+        $query->bindValue(':pagfim', $this->pagfim, PDO::PARAM_INT);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model readLimit) os registros");
+
+        return $result;
+
+    }
+
+    function readForUser($data){
+        
+        $this->populate($data);
         
         $sql = "SELECT oco.numero,oco.id as id_oc,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `usuario_ordem_compra` usu_oco
         INNER JOIN `usuarios` usu
@@ -40,9 +65,12 @@ class UsuarioOrdemCompraModel extends Model{
             on usu_oco.id_ordem_compra = oco.id
         INNER JOIN `documentos` doc
             on oco.id = doc.id_ordem_compra
-            WHERE usu.email = '".$_SESSION['email']."'";
+            WHERE usu.email = '".$_SESSION['email']."' limit :pagini,:pagfim";
 
         $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':pagini', $this->pagini, PDO::PARAM_INT);
+        $query->bindValue(':pagfim', $this->pagfim, PDO::PARAM_INT);
 
         $result = Database::executa($query);   
 

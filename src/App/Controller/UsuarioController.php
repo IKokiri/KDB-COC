@@ -22,6 +22,11 @@ class UsuarioController {
         return $this->model->read();
     }
 
+    function readLimit($data){
+        
+        return $this->model->readLimit($data);
+    }
+
     function filter($data){
         
         return $this->model->filter($data);
