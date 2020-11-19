@@ -43,6 +43,8 @@ function getLogin(formData){
     .then(data => {     
         if(data.count==1)   
             window.location.href = `${base_front}/visualizacao_ocs.php`; 
+        else
+            alert("Dados incorretos")
     })
     .catch(console.error);
 }
