@@ -47,7 +47,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Ordem de Compra</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -59,6 +59,12 @@
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Número da OC:</label>
                 <input type="number" class="form-control" id="numero">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputEmail4">Observação:</label>
+                <textarea name="observacao" id="observacao" class="form-control" cols="30" rows="10"></textarea>
               </div>
             </div>
             <input type="hidden" id="id">

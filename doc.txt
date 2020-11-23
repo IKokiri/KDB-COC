@@ -9,3 +9,6 @@
 
 
 - Todos os usuários acessam apenas OCs vinculadas à eles.
+
+ALTER TABLE `coc`.`ordem_compra` 
+ADD COLUMN `observacao` LONGTEXT NULL AFTER `editado`;

@@ -88,13 +88,16 @@ class OCModel extends Model{
         $this->populate($data);
         
         $sql = "INSERT INTO ".$this->table." 
-                    (`numero`)
+                    (`numero`,
+                    `observacao`)
                     VALUES
-                    (:numero)";
+                    (:numero,
+                    :observacao)";
 
         $query = $this->conn->prepare($sql);
         
         $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
+        $query->bindValue(':observacao', $this->observacao, PDO::PARAM_STR);
 
         $result = Database::executa($query); 
           
@@ -109,12 +112,14 @@ class OCModel extends Model{
 
         $sql = "UPDATE ".$this->table." 
                     SET
-                    `numero` = :numero
+                    `numero` = :numero,
+                    `observacao` = :observacao
                     WHERE `id` = :id;";
 
         $query = $this->conn->prepare($sql);
         
         $query->bindValue(':numero', $this->numero, PDO::PARAM_STR);
+        $query->bindValue(':observacao', $this->observacao, PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_STR);
 
         $result = Database::executa($query);   

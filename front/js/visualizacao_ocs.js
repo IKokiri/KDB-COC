@@ -1,5 +1,6 @@
 const controller = "UsuarioOrdemCompraController"
 const downloadDocumentoController = "DownloadDocumentoController"
+const OCcontroler = "OCController"
 
 $(document).ready(function(){
 
@@ -16,6 +17,30 @@ $(document).on("keyup","#buscar",function(){
 
 function buscar(term){
     grid_principal(term);
+}
+
+function setObsOC(id){
+
+    formData = new FormData();
+    formData.append('class', OCcontroler);
+    formData.append('method', 'getId');
+    formData.append('id', id);
+    
+        fetch(base_request,{
+            method:'post',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }          
+            linha = data.result_array[0];
+            
+            document.querySelector(".observacao").innerHTML = linha.observacao
+
+        })
+        .catch(console.error);
 }
 
 function grid_principal(term = "",ini = 0,fim = 10){
@@ -47,6 +72,11 @@ function grid_principal(term = "",ini = 0,fim = 10){
                 <tr>
                     <td>${dados[linha].numero}</td>
                     <td>${dados[linha].nome}</td>
+                    <td>
+                        <a id="observacao_oc" data-idoc="${dados[linha].id_oc}" href="javascript:void(0)">
+                            <img src="./icons/obs.png">
+                        </a>
+                    </td>
                     <td>
                         <a id="download" data-iddocumento="${dados[linha].id_documento}" href="${base}/src/docs/${dados[linha].id_oc}/${dados[linha].path}" target="_blank">
                             <img src="./icons/ext/${dados[linha].extensao}.png">
@@ -91,6 +121,16 @@ $(document).on('click','.anterior',function(){
         return;
     }
     grid_principal("",ini,fim)
+})
+
+
+
+$(document).on('click','#observacao_oc',function(){
+
+    idoc = $(this).attr("data-idoc");
+    setObsOC(idoc)
+    $('#modal_obs').modal('show')
+
 })
 
 $(document).on('click','.proximo',function(){

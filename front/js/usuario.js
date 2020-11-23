@@ -124,9 +124,6 @@ function grid_principal(term = "",ini = 0,fim = 10){
     })
     .then(response => response.json())
     .then(data => { 
-        
-        
-
         grid = ""
         dados = data.result_array
         for(linha in dados){
@@ -141,13 +138,13 @@ function grid_principal(term = "",ini = 0,fim = 10){
             `
         }
         document.querySelector(".grid").innerHTML = grid
-
-        pagination(ini,fim);
+       
+        pagination(ini,fim,data.count);
     })
     .catch(console.error);
 }
-function pagination(ini,fim = 10){
-
+function pagination(ini,fim = 10,count){
+    
     ini = parseInt(ini);
     fim = parseInt(fim);
    

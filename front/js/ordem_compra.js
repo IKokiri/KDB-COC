@@ -11,7 +11,10 @@ function inicio(){
     limpar_campos()
     $('.modal').modal('hide')
 }
-
+$('.modal').on('hidden.bs.modal', function (e) {
+    
+    limpar_campos()
+  })
 function gridUsers(term = ""){
 
     formData = new FormData();
@@ -67,9 +70,11 @@ function gridUsers(term = ""){
 function carregar_campos(){
     formData = new FormData();
     let numero = document.querySelector("#numero").value;
+    let observacao = document.querySelector("#observacao").value;
     let id = document.querySelector("#id").value;
 
     formData.append('numero', numero);
+    formData.append('observacao', observacao);
     formData.append('id', id);
 
     return formData;
@@ -100,6 +105,7 @@ function checkUsers(){
 function limpar_campos(){
 
     let numero = document.querySelector("#numero").value = "";
+    let observacao = document.querySelector("#observacao").value = "";    
     let id = document.querySelector("#id").value = "";
 
 }
@@ -108,16 +114,19 @@ function preencher_form(data){
 
     let numero = data.numero;
     let id = data.id;
+    let observacao = data.observacao;
     
     $('#modal_principal').modal('show')
     document.querySelector("#numero").value = numero
     document.querySelector("#id").value = id
+    document.querySelector("#observacao").value = observacao
     
 }
 
 $(document).on('click','#abrir_modal',function(){
     $('#modal_principal').modal('show')
 })
+
 $(document).on('click','#addGroup',function(){
     id = $(this).attr("data-id");
     document.querySelector("#id").value = id;
