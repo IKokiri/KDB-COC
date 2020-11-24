@@ -41,7 +41,7 @@ class Permissoes {
                     ]
             ],
             "OCController"=>[
-                'permissao' => 1,
+                'permissao' => 0,
                 'funcoes' => [
                         'create'=>1,
                         'read'=>1,

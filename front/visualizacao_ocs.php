@@ -50,9 +50,17 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body observacao">
+        <div class="modal-body">
          
-
+        <form>
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="inputEmail4">Observação:</label>
+                <textarea readonly class="form-control observacao" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+            <input type="hidden" id="id">
+          </form>
  
 
         </div>
