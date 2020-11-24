@@ -45,7 +45,7 @@ class Permissoes {
                 'funcoes' => [
                         'create'=>1,
                         'read'=>1,
-                        'getId'=>1,
+                        'getId'=>0,
                         'update'=>1,
                         'delete'=>1,
                         'filter'=>1,
