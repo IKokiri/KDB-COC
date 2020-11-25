@@ -85,7 +85,9 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Usuários</h5>
+        <h5 class="modal-title">Usuários<div class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" id="buscar_usuario" type="search" placeholder="Buscar" aria-label="Search">
+        </div></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

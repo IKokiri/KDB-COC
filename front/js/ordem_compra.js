@@ -15,17 +15,15 @@ $('.modal').on('hidden.bs.modal', function (e) {
     
     limpar_campos()
   })
+
 function gridUsers(term = ""){
 
     formData = new FormData();
 
     formData.append('class', userController);
-    if(term){
-        formData.append('method', 'filter');
-        formData.append('term', term);
-    }else{
+  
         formData.append('method', 'read');
-    }
+    
 
     fetch(base_request,{
         method:'post',
@@ -33,7 +31,8 @@ function gridUsers(term = ""){
     })
     .then(response => response.json())
     .then(data => { 
-    
+        
+            
         div = Math.ceil(data.count/4)
         
         grid = ""
@@ -41,9 +40,11 @@ function gridUsers(term = ""){
         dados = data.result_array
         i=0;
         for(linha in dados){
+           
+
             ckbUsers += 
             `  
-            <div class='col-3'>
+            <div data-email="${dados[linha].email}" class='col-3'>
                 <div class="form-group form-check">
                 <input type="checkbox" data-checked="id${dados[linha].id}" class="checkGroupUser form-check-input" id="${dados[linha].id}">
                 <label class="form-check-label" for="${dados[linha].id}">${dados[linha].email}</label>
@@ -210,6 +211,28 @@ $(document).on("keyup","#buscar",function(){
     term = document.querySelector("#buscar").value;
     buscar(term)
 })
+
+$(document).on("keyup","#buscar_usuario",function(){
+    term = document.querySelector("#buscar_usuario").value;
+    // gridUsers(term)
+//     element = document.getElementById("testelz");
+//   element.classList.add("d-none");
+//   document.querySelectorAll('[data-email]').classList.add("d-none");
+    var list;
+    list = document.querySelectorAll("[data-email]");
+    for (var i = 0; i < list.length; ++i) {
+
+        if(list[i].getAttribute('data-email').indexOf(term) < 0){
+            list[i].classList.add('d-none');
+        }else{
+            
+            list[i].classList.remove('d-none');
+        }
+    }
+    
+})
+
+
 
 function buscar(term){
     grid_principal(term);
