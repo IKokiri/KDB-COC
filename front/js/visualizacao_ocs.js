@@ -63,20 +63,28 @@ function grid_principal(term = "",ini = 0,fim = 10){
         body: formData
     })
     .then(response => response.json())
-    .then(data => {        
-        grid = ""
+    .then(data => {    
+        grid = ""    
+       
         dados = data.result_array
+        numeroOC = 0;
         for(linha in dados){
-            grid += 
-            `
-                <tr>
-                    <td>${dados[linha].numero}</td>
-                    <td>${dados[linha].nome}</td>
+            if(numeroOC != dados[linha].numero){
+                grid += `<tr data-idoc="${dados[linha].id_oc}" id="observacao_oc" class='table-primary'>
+                    <td  colspan='2'><b>OC: ${dados[linha].numero}</b> 
+                    </td>
                     <td>
-                        <a id="observacao_oc" data-idoc="${dados[linha].id_oc}" href="javascript:void(0)">
+                        <a class='text-right'   href="javascript:void(0)">
                             <img src="./icons/obs.png">
                         </a>
                     </td>
+                </tr>`
+            }
+            numeroOC = dados[linha].numero
+            grid += 
+            `
+                <tr>
+                    <td>${dados[linha].nome}</td>
                     <td>
                         <a id="download" data-iddocumento="${dados[linha].id_documento}" href="${base}/src/docs/${dados[linha].id_oc}/${dados[linha].path}" target="_blank">
                             <img src="./icons/ext/${dados[linha].extensao}.png">

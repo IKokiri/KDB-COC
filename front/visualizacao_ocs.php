@@ -77,9 +77,7 @@
   <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>
           <tr>
-            <th scope="col">OC</th>
             <th scope="col">Documento</th>
-            <th scope="col">Obs</th>
             <th scope="col">Download</th>
             <th scope="col">Info</th>
           </tr>
