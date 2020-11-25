@@ -61,13 +61,19 @@ $('#modal_principal').on('hidden.bs.modal', function () {
   })
 
 $(document).on('click','#salvar',function(){
+    ocnome = document.querySelector("#id_ordem_compra").selectedOptions[0].text
+   
     formData = carregar_campos()
     id = formData.get("id");
 
     if(id){
         update(formData)
     }else{
-        criar(formData)
+        var r = confirm(`Deseja alterar a OC: ${ocnome}`);
+        if (r == true) {
+            criar(formData)
+        }
+        
     }
 
 })

@@ -77,7 +77,7 @@ function grid_principal(term = "",ini = 0,fim = 10){
                         <B>
                             PARA AS VER OBSERVAÇÕES NA OC ${dados[linha].numero}, CLIQUE AQUI.
                         </B>
-                    </td>
+                </td>
                 </tr>`
             }
             numeroOC = dados[linha].numero
