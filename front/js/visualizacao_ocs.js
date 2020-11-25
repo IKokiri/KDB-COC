@@ -71,12 +71,12 @@ function grid_principal(term = "",ini = 0,fim = 10){
         for(linha in dados){
             if(numeroOC != dados[linha].numero){
                 grid += `<tr data-idoc="${dados[linha].id_oc}" id="observacao_oc" class='table-primary'>
-                    <td  colspan='2'><b>OC: ${dados[linha].numero}</b> 
+                    <td  colspan='1'><B>OC: ${dados[linha].numero}</B>
                     </td>
-                    <td>
-                        <a class='text-right'   href="javascript:void(0)">
-                            <img src="./icons/obs.png">
-                        </a>
+                    <td colspan='2'>
+                        <B>
+                            PARA AS VER OBSERVAÇÕES NA OC ${dados[linha].numero}, CLIQUE AQUI.
+                        </B>
                     </td>
                 </tr>`
             }

@@ -78,9 +78,7 @@
       </div>
     </div>
   </div>
-
   
-
   <div class="modal" id="modal_addgroup" tabindex="-1">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
