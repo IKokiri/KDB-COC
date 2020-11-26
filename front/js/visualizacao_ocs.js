@@ -75,7 +75,7 @@ function grid_principal(term = "",ini = 0,fim = 10){
                     </td>
                     <td colspan='2'>
                         <B>
-                            PARA VER AS OBSERVAÇÕES REFERENTES À OC: ${dados[linha].numero}, CLIQUE AQUI.
+                            PARA VER AS OBSERVAÇÕES REFERENTE À OC ${dados[linha].numero}, CLIQUE AQUI.
                         </B>
                 </td>
                 </tr>`
