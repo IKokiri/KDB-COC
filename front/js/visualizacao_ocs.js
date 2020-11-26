@@ -81,6 +81,10 @@ function grid_principal(term = "",ini = 0,fim = 10){
                 </tr>`
             }
             numeroOC = dados[linha].numero
+            
+            if(dados[linha].nome == null){
+                continue
+            }
             grid += 
             `
                 <tr>

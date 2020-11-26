@@ -63,7 +63,7 @@ class UsuarioOrdemCompraModel extends Model{
             on usu_oco.id_usuario = usu.id
         INNER JOIN `ordem_compra` oco
             on usu_oco.id_ordem_compra = oco.id
-        INNER JOIN `documentos` doc
+        LEFT JOIN `documentos` doc
             on oco.id = doc.id_ordem_compra
             WHERE usu.email = '".$_SESSION['email']."' order by oco.numero desc limit :pagini,:pagfim";
 
