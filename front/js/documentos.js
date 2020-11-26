@@ -65,10 +65,15 @@ $(document).on('click','#salvar',function(){
    
     formData = carregar_campos()
     id = formData.get("id");
-
+    files = document.querySelector("#file").files.length;
+    if(files < 1){
+        alert("É necessário anexar pelo menos um arquivo à OC.")
+        return;
+    }
     if(id){
         update(formData)
     }else{
+
         var r = confirm(`Deseja alterar a OC: ${ocnome}`);
         if (r == true) {
             criar(formData)
