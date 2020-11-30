@@ -61,9 +61,7 @@
             </div>
             <input type="hidden" id="id">
           </form>
- 
-
-        </div>
+         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
           <button type="button" id="salvar" class="btn btn-primary">Salvar</button>
@@ -71,8 +69,6 @@
       </div>
     </div>
   </div>
-
-
  <br>
   <table class="table table-bordered  table-hover col-10 offset-1">
         <thead>

@@ -35,7 +35,7 @@ class DocumentoModel extends Model{
 
         $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao,ord.id as id_oc FROM $this->table doc
         INNER JOIN ordem_compra ord
-            on doc.id_ordem_compra = ord.id limit :pagini,:pagfim";
+            on doc.id_ordem_compra = ord.id  order by ord.numero desc limit :pagini,:pagfim";
 
         $query = $this->conn->prepare($sql);
 
