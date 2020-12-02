@@ -415,4 +415,36 @@ function getInfo(id_documento){
     })
     .catch(console.error);
 }
+
+
+$(document).on('click','#observacao_oc',function(){
+
+    idoc = $(this).attr("data-idoc");
+    setObsOC(idoc)
+    $('#modal_obs').modal('show')
+
+})
+function setObsOC(id){
+
+    formData = new FormData();
+    formData.append('class', OCController);
+    formData.append('method', 'getId');
+    formData.append('id', id);
+    
+        fetch(base_request,{
+            method:'post',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {  
+            if(data.MSN){
+                base_erro(data.MSN.errorInfo[1])
+            }          
+            linha = data.result_array[0];
+            
+            document.querySelector(".observacao").innerHTML = linha.observacao
+
+        })
+        .catch(console.error);
+}
 })
