@@ -15,7 +15,7 @@ class OCModel extends Model{
 
     function read(){
         
-        $sql = "SELECT * FROM ".$this->table;
+        $sql = "SELECT * FROM ".$this->table." order by criado desc";
 
         $query = $this->conn->prepare($sql);
 
