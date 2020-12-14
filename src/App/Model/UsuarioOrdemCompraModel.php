@@ -101,7 +101,7 @@ class UsuarioOrdemCompraModel extends Model{
         
         $this->populate($data);
         
-        $sql = "SELECT oco.numero,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `usuario_ordem_compra` usu_oco
+        $sql = "SELECT oco.numero,oco.id as id_oc,doc.nome,doc.path,doc.extensao,doc.id as id_documento from `usuario_ordem_compra` usu_oco
         INNER JOIN `usuarios` usu
             on usu_oco.id_usuario = usu.id
         INNER JOIN `ordem_compra` oco
