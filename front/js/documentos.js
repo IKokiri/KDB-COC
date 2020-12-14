@@ -1,6 +1,7 @@
 const controller = "DocumentoController"
 const OCController = "OCController"
 const downloadDocumentoController = "DownloadDocumentoController"
+const userController = "UsuarioController";
 
 $(document).ready(function(){
 
@@ -12,6 +13,7 @@ function inicio(){
     carregar_ocs();
     $('#modal_principal').modal('hide')
     document.querySelector('.enviandoArquivos').style.display = 'none';
+    gridUsers()
 }
 
 function carregar_campos(){
@@ -446,5 +448,60 @@ function setObsOC(id){
 
         })
         .catch(console.error);
+}
+
+function gridUsers(term = ""){
+
+    id_oc = document.querySelector("#id_ordem_compra").value
+
+    formData = new FormData();
+
+    formData.append('class', userController);
+  
+        formData.append('method', 'readUserOc');
+        formData.append('id_oc', id_oc);
+    
+
+    fetch(base_request,{
+        method:'post',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => { 
+        
+            
+        div = Math.ceil(data.count/4)
+        
+        grid = ""
+        ckbUsers=""
+        dados = data.result_array
+        i=0;
+        for(linha in dados){
+           
+
+            ckbUsers += 
+            `  
+            <div data-email="${dados[linha].email}" class='col-3'>
+                <div class="form-group form-check">
+                <input type="checkbox" data-checked="id${dados[linha].id}" class="checkGroupUser form-check-input" id="${dados[linha].id}">
+                <label class="form-check-label" for="${dados[linha].id}">${dados[linha].email}</label>
+                </div>
+            </div>
+            ` 
+            
+            i++
+
+            if(i==4){
+                grid += "<div class='row'>"+ckbUsers+"</div>"
+                ckbUsers = ""
+                i=0;
+            }
+        }
+        
+        grid += "<div class='row'>"+ckbUsers+"</div>"
+        checkUsers();
+        document.querySelector(".pessoas_notificar").innerHTML = grid
+    })
+    .catch(console.error);
 }
 })

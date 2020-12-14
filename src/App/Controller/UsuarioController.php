@@ -16,12 +16,15 @@ class UsuarioController {
 
         return $this->model->create($data);
     }
-
+    
     function read($data){
         
         return $this->model->read();
     }
-
+    function readUserOc($data){
+        
+        return $this->model->readUserOc($data);
+    }
     function readLimit($data){
         
         return $this->model->readLimit($data);

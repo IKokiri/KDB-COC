@@ -31,6 +31,23 @@ class UsuarioOrdemCompraModel extends Model{
 
     }
 
+    function readUserOc(){
+        
+        $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
+        INNER JOIN ordem_compra ord
+        on usu_ord.id_ordem_compra = ord.id
+        INNER JOIN usuarios usu
+        on usu_ord.id_usuario = usu.id";
+
+        $query = $this->conn->prepare($sql);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model read) os registros");
+
+        return $result;
+
+    }
     function readLimit($data){
         
         $this->populate($data);
@@ -89,7 +106,7 @@ class UsuarioOrdemCompraModel extends Model{
             on usu_oco.id_usuario = usu.id
         INNER JOIN `ordem_compra` oco
             on usu_oco.id_ordem_compra = oco.id
-        INNER JOIN `documentos` doc
+            LEFT JOIN `documentos` doc
             on oco.id = doc.id_ordem_compra
         WHERE usu.email = '".$_SESSION['email']."' and (numero LIKE :numero or nome LIKE :nome or path LIKE :path or extensao LIKE :extensao)";
 

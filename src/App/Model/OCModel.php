@@ -47,7 +47,6 @@ class OCModel extends Model{
 
     }
 
-
     function getId($data){
         
         $this->populate($data);

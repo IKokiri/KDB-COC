@@ -68,7 +68,13 @@
                 <select class="form-control" id="id_ordem_compra">
 
                 </select>
-              </div>        
+              </div> 
+              <div class="form-group col-md-6">
+                
+                <label for="inputEmail4">Notificar:</label>
+                <div class="pessoas_notificar">
+                </div>
+                </div>        
             </div>
             <div class="form-group">
               <label for="exampleFormControlFile1"></label>

@@ -50,6 +50,7 @@ class Permissoes {
                         'delete'=>1,
                         'filter'=>1,
                         'readLimit'=>1
+                        
                     ]
             ],
             "UsuarioController"=>[
@@ -61,7 +62,8 @@ class Permissoes {
                         'update'=>1,
                         'delete'=>1,
                         'filter'=>1,
-                        'readLimit'=>1
+                        'readLimit'=>1,
+                        'readUserOc'=>1
                     ]
             ],
             "UsuarioOrdemCompraController"=>[
