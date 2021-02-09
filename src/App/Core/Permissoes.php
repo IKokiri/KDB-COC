@@ -79,7 +79,9 @@ class Permissoes {
                         'filterForUser'=>0,
                         'addUsers'=>1,
                         'getUsersOC'=>1,
-                        'readLimit'=>1
+                        'readLimit'=>1,
+                        'getOCUsers'=>0,
+                        'aprovar'=>0
                     ]
             ],
             "Gosth"=>[

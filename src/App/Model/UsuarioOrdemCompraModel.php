@@ -48,11 +48,13 @@ class UsuarioOrdemCompraModel extends Model{
         return $result;
 
     }
+
+
     function readLimit($data){
         
         $this->populate($data);
 
-        $sql = $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
+        $sql = "SELECT ord.numero,usu.email,usu_ord.id_usuario,usu_ord.id_ordem_compra FROM $this->table usu_ord
         INNER JOIN ordem_compra ord
         on usu_ord.id_ordem_compra = ord.id
         INNER JOIN usuarios usu
@@ -187,6 +189,28 @@ class UsuarioOrdemCompraModel extends Model{
         return $result;
     }
 
+     
+    function getOCUsers($data){
+
+        $this->populate($data);
+
+        $sql = "SELECT usu.email, usuoc.aprovado FROM ".$this->table." usuoc
+        inner join usuarios usu
+        on usuoc.id_usuario = usu.id
+        WHERE `id_ordem_compra` = :id_ordem_compra;";
+
+        $query = $this->conn->prepare($sql);
+
+        $query->bindValue(':id_ordem_compra', $this->id_oc, PDO::PARAM_STR);
+
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Buscou ($this->model getOCUsers) o registro $this->id");
+
+        return $result;
+    }
+ 
+
     function filter($data){
         
         $this->populate($data);
@@ -251,6 +275,29 @@ class UsuarioOrdemCompraModel extends Model{
         $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
         $query->bindValue(':idusuario', $this->idusuario, PDO::PARAM_STR);        
         $query->bindValue(':idordemcompra', $this->idordemcompra, PDO::PARAM_STR);
+      
+        $result = Database::executa($query);   
+
+        $this->log->setInfo("Atualizaou ($this->model update) o registro $this->id");
+
+        return $result;
+    }
+
+    
+    function aprovar($data){
+
+        $this->populate($data);
+
+       $sql = "UPDATE ".$this->table." 
+                SET
+                `aprovado` = :aprovado
+                WHERE `id_usuario` = :idusuario and `id_ordem_compra` = :id_ordem_compra;";
+
+        $query = $this->conn->prepare($sql);
+        
+        $query->bindValue(':idusuario', $_SESSION['id'], PDO::PARAM_STR);        
+        $query->bindValue(':id_ordem_compra', $this->id_ordem_compra, PDO::PARAM_STR);
+        $query->bindValue(':aprovado', $this->aprovado, PDO::PARAM_STR);        
       
         $result = Database::executa($query);   
 

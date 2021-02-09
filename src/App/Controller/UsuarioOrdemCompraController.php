@@ -58,6 +58,16 @@ class UsuarioOrdemCompraController {
         return $this->model->delete($request);
     }
 
+    function aprovar($request){
+        
+        return $this->model->aprovar($request);
+    }
+    
+    function getOCUsers($request){
+        
+        return $this->model->getOCUsers($request);
+    }
+
     function addUsers($request){
 
         $users = explode(",",$request['users']);
