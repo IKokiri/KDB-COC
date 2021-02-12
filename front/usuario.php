@@ -60,6 +60,7 @@
                 <select  class="form-control" name="permissao" id="permissao">
                   <option value="0">Padrão</option>
                   <option value="1">Adminsitrador</option>
+                  <option value="-1">Fornecedor</option>
                 </select>
               </div>
               

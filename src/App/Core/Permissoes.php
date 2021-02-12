@@ -26,10 +26,10 @@ class Permissoes {
                     ]
             ],
             "DownloadDocumentoController"=>[
-                'permissao' => 0,
+                'permissao' => -1,
                 'funcoes' => [
-                        'add'=>0,
-                        'getInfo'=>0
+                        'add'=>-1,
+                        'getInfo'=>-1
                     ]
             ],
             "LoginController"=>[
@@ -41,16 +41,15 @@ class Permissoes {
                     ]
             ],
             "OCController"=>[
-                'permissao' => 0,
+                'permissao' => -1,
                 'funcoes' => [
                         'create'=>1,
                         'read'=>1,
-                        'getId'=>0,
+                        'getId'=>-1,
                         'update'=>1,
                         'delete'=>1,
                         'filter'=>1,
-                        'readLimit'=>1
-                        
+                        'readLimit'=>1                        
                     ]
             ],
             "UsuarioController"=>[
@@ -67,33 +66,32 @@ class Permissoes {
                     ]
             ],
             "UsuarioOrdemCompraController"=>[
-                'permissao' => 0,
+                'permissao' => -1,
                 'funcoes' => [
                         'create'=>1,
                         'read'=>1,
                         'getId'=>1,
                         'update'=>1,
                         'delete'=>1,
-                        'readForUser'=>0,
+                        'readForUser'=>-1,
                         'filter'=>1,
-                        'filterForUser'=>0,
+                        'filterForUser'=>-1,
                         'addUsers'=>1,
                         'getUsersOC'=>1,
                         'readLimit'=>1,
-                        'getOCUsers'=>0,
-                        'aprovar'=>0
+                        'getOCUsers'=>-1,
+                        'aprovar'=>-1
                     ]
             ],
             "Gosth"=>[
-                'permissao' => 0,
+                'permissao' => -1,
                 'funcoes' => [
-                        'gosth'=>0
+                        'gosth'=>-1
                     ]
             ],
         ];
 
         $this->telas = [
-
             [
                 'nome'=>"Usuários",
                 'caminho'=>"usuario.php",
@@ -127,7 +125,7 @@ class Permissoes {
             [
                 'nome'=>"Visualizar OCs",
                 'caminho'=>"visualizacao_ocs.php",
-                'permissao'=>0
+                'permissao'=>-1
             ],
             
         ];

@@ -72,15 +72,18 @@ function grid_principal(term = "",ini = 0,fim = 10){
             if(numeroOC != dados[linha].numero){
                 grid += `<tr data-idoc="${dados[linha].id_oc}"  class='table-primary'>
                     <td  colspan='1'><B>OC: ${dados[linha].numero}</B>
-                    <td colspan='2' id="observacao_oc">
+                    <td colspan='1' id="observacao_oc">
                         <B>
                             PARA VER AS OBSERVAÇÕES REFERENTE À OC ${dados[linha].numero}, CLIQUE AQUI.
                         </B>
                 </td>
                 </td>
-                    <td data-idoc="${dados[linha].id_oc}" class='text-center mdl_aprovacoes'>
-                     <img src="./icons/handshake.png">
-                    </td>
+                <td id="abrir_modal_documento">
+                    <img src="./icons/add.png">
+                </td>
+                <td data-idoc="${dados[linha].id_oc}" class='text-center mdl_aprovacoes'>
+                    <img src="./icons/handshake.png">
+                </td>
                 </tr>`
             }
             numeroOC = dados[linha].numero
@@ -264,6 +267,10 @@ function addDownload(id_documento){
     .then()
     .catch(console.error);
 }
+
+$(document).on('click','#abrir_modal_documento',function(){
+    $('#modal_documento').modal('show')
+})
 
 function getInfo(id_documento){
     
