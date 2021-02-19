@@ -72,7 +72,7 @@ class DocumentoModel extends Model{
         
         $this->populate($data);
 
-        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao FROM $this->table doc
+        $sql = "SELECT doc.id,doc.nome,doc.path,ord.numero,doc.extensao,ord.id as id_oc FROM $this->table doc
     INNER JOIN ordem_compra ord
         on doc.id_ordem_compra = ord.id
         WHERE nome LIKE :nome or path LIKE :path or numero LIKE :numero or extensao LIKE :extensao";
