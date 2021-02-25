@@ -72,7 +72,7 @@ function grid_principal(term = "",ini = 0,fim = 10){
             if(numeroOC != dados[linha].numero){
                 grid += `<tr data-idoc="${dados[linha].id_oc}"  class='table-primary'>
                     <td  colspan='1'><B>OC: ${dados[linha].numero}</B>
-                    <td colspan='1' id="observacao_oc">
+                    <td colspan='1' data-idoc="${dados[linha].id_oc}" id="observacao_oc">
                         <B>
                             PARA VER AS OBSERVAÇÕES REFERENTE À OC ${dados[linha].numero}, CLIQUE AQUI.
                         </B>
