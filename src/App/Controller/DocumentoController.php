@@ -138,13 +138,19 @@ class DocumentoController {
     
         $nomeCompleto = $result['result_array'][0]['path'];
         $id_ordem_compra = $result['result_array'][0]['id_ordem_compra'];
-        $this->comunicar($id_ordem_compra,$nomeCompleto,"Removidos");
-        /**
-         * renomeia o arquivo
-         */
-        rename("./src/docs/".$id_ordem_compra."/".$nomeCompleto, "./src/docs/".$id_ordem_compra."/".date('YmdHis').$nomeCompleto);
 
-        return $this->model->delete($data);
+        $retorno = $this->model->delete($data);
+        if(!$retorno['MSN']->errorInfo){
+            $this->comunicar($id_ordem_compra,$nomeCompleto,"Removidos");
+
+            /**
+             * renomeia o arquivo
+             */
+            rename("./src/docs/".$id_ordem_compra."/".$nomeCompleto, "./src/docs/".$id_ordem_compra."/".date('YmdHis').$nomeCompleto);
+
+        }
+       
+        return $retorno;
     }
 
 }

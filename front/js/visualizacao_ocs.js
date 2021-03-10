@@ -2,13 +2,17 @@ const controller = "UsuarioOrdemCompraController"
 const downloadDocumentoController = "DownloadDocumentoController"
 const OCcontroler = "OCController"
 
+
 $(document).ready(function(){
 
 inicio();
 
 function inicio(){
+    
+    document.querySelector('.enviandoArquivos').style.display = 'none';
     grid_principal()
 }
+
 
 $(document).on("keyup","#buscar",function(){
     term = document.querySelector("#buscar").value;

@@ -18,20 +18,7 @@
         <div class="modal-body">
           <!-- FORM -->
           <form>
-            <div class="form-row">
-
-              <div class="form-group col-md-6">
-                <label for="inputEmail4">OC</label>
-                <select class="form-control" id="id_ordem_compra">
-
-                </select>
-              </div> 
-              <div class="form-group col-md-6">
-                
-                <label for="inputEmail4">Notificar:</label>
-                <div class="pessoas_notificar">
-                </div>
-                </div>        
+            <div class="form-row">    
             </div>
             <div class="form-group">
               <label for="exampleFormControlFile1"></label>
@@ -41,7 +28,7 @@
             <input type="checkbox" class="form-check-input" id="notificar">
             <label class="form-check-label" for="exampleCheck1">Notificar usuários</label>
           </div>
-            <input type="hidden" id="id">
+            <input type="hidden" id="id_oc">
           </form>
           <!-- FORM -->
         </div>
@@ -54,7 +41,7 @@
         </div>        
         <div class="botoesPadrao">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            <button type="button" id="salvar" class="btn btn-primary">Salvar</button>
+            <button type="button" id="enviarArquivos" class="btn btn-primary">Salvar</button>
         </div>
           
         </div>
